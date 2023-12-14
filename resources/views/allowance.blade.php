@@ -84,7 +84,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="employeeName" class="form-label">Allowance Amount</label>
-                                                <input type="text" class="form-control" id="amount"
+                                                <input type="number" class="form-control" id="amount"
                                                     placeholder="Write the Allowance amount" name="amount">
                                             </div>
 

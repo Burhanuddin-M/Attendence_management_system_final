@@ -18,12 +18,11 @@
     <div class="container text-center">
         <h1 class="text-center text-primary">Attendence Module</h1><br>
         <!-- For medium and larger screens, the buttons will be displayed inline -->
-        <div class="d-none d-md-block">
-            <a href="{{route('addEmployee')}}" class="btn btn-primary btn-block w-50">Add Beneficiary</a><br><br>
-            <a href="{{route('attendence')}}" class="btn btn-primary btn-block w-50">Attendance</a><br><br>
-            <a href="{{route('masterTable')}}" class="btn btn-primary btn-block w-50">Master Table</a><br><br>
-            <a href="{{route('allowance')}}" class="btn btn-primary btn-block w-50">Allowance</a><br><br>
-            <a href="" class="btn btn-primary btn-block w-50">Report</a>
+        <div class="">
+            <a href="{{route('addEmployee')}}" class="btn btn-outline-primary btn-block fw-bold">Add Beneficiary</a><br><br>
+            <a href="{{route('attendence')}}" class="btn btn-outline-primary btn-block fw-bold">Attendance</a><br><br>
+            <a href="{{route('masterTable')}}" class="btn btn-outline-primary btn-block  fw-bold">Master Table</a><br><br>
+            <a href="{{route('allowance')}}" class="btn btn-outline-primary btn-block fw-bold">Allowance</a><br><br>
         </div>
     </div>
     
