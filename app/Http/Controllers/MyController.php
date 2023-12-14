@@ -22,12 +22,23 @@ public function allowance(){
 }
 
 public function post_allowance(Request $request,$id){
-    $Employee = Employee::find($id);
 
-    $portfolio_amount = $Employee->amount_portfolio;
     $amount = $request->amount;
-    $Employee->amount_portfolio = $portfolio_amount - $amount;
+    $message = $request->message;
 
+
+    $transaction = Transaction::create([
+        'employee_id' => $id,
+        'amount' => $amount,
+        'type' => "DEBIT",
+        'note' => $message,
+    ]);
+    
+
+
+    $Employee = Employee::find($id);
+    $portfolio_amount = $Employee->amount_portfolio;
+    $Employee->amount_portfolio = $portfolio_amount - $amount;
     $Employee->save();
 
     $Message = $Employee->name ." was taken the amount of ".$amount;

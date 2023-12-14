@@ -88,6 +88,12 @@
                                                     placeholder="Write the Allowance amount" name="amount">
                                             </div>
 
+                                            <div class="mb-3">
+                                                <label for="message" class="form-label">Message</label>
+                                                <textarea class="form-control" id="message" placeholder="Write the message" name="message"></textarea>
+                                            </div>
+                                            
+
 
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
