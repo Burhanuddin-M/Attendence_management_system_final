@@ -41,9 +41,12 @@
                     <th>Portfolio</th>
                 </tr>
                 <tr>
-                    <td class="text-danger font-weight-bold">20,000</td>
-                    <td class="text-success font-weight-bold">5,000</td>
-                    <td class="text-danger font-weight-bold">15,000</td>
+                    <td class="text-danger font-weight-bold">{{$DebitsAmount}}</td>
+                    <td class="text-success font-weight-bold">{{$CreditsAmount}}</td>
+                    <td class="{{ $Portfolio < 0 ? 'text-danger font-weight-bold' : 'text-success font-weight-bold' }}">
+                        {{ abs($Portfolio) }}
+                    </td>
+                    
                 </tr>
             </table>
 
