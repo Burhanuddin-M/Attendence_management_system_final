@@ -24,43 +24,37 @@ Route::get('/', function () {
 })->name('attendence.index');
 
 //Add Beneficiary Show
-Route::get('/addEmployee',[EmployeeController::class,'AddEmployee'])->name('addEmployee');
+Route::get('/addEmployee', [EmployeeController::class, 'AddEmployee'])->name('addEmployee');
 
-//Add Post Beneficiary 
-Route::post('/addEmployee',[EmployeeController::class,'PostAddEmployee'])->name('PostAddEmployee');
+//Add Post Beneficiary
+Route::post('/addEmployee', [EmployeeController::class, 'PostAddEmployee'])->name('PostAddEmployee');
 
 //Edit Post Beneficiary
-Route::put('/EditEmployee/{id}',[EmployeeController::class,'PostEditEmployee'])->name('PostEditEmployee');
+Route::put('/EditEmployee/{id}', [EmployeeController::class, 'PostEditEmployee'])->name('PostEditEmployee');
 
 //Show Master Table
-Route::get('/masterTable',[EmployeeController::class,'masterTable'])->name('masterTable');
+Route::get('/masterTable', [EmployeeController::class, 'masterTable'])->name('masterTable');
 
-//Allowance 
-Route::get('/deposits',[MyController::class,'deposits'])->name('deposits');
+//Allowance
+Route::get('/deposits', [MyController::class, 'deposits'])->name('deposits');
 
-//Post Allowance 
-Route::post('/deposits/{id}',[MyController::class,'post_deposits'])->name('Post_deposits');
+//Post Allowance
+Route::post('/deposits/{id}', [MyController::class, 'post_deposits'])->name('Post_deposits');
 
 //Attendence
-Route::get('/attendence',[AttendanceController::class,'attendence'])->name('attendence');
+Route::get('/attendence', [AttendanceController::class, 'attendence'])->name('attendence');
 
 //Post Attendence
-Route::post('/attendence/{id}',[AttendanceController::class,'attendencePost'])->name('attendencePost');
+Route::post('/attendence/{id}', [AttendanceController::class, 'attendencePost'])->name('attendencePost');
 
 //Attendence
-Route::get('/transaction',[TransactionController::class,'showtransaction'])->name('transaction.show');
+Route::get('/transaction', [TransactionController::class, 'showtransaction'])->name('transaction.show');
 
 //Report
-Route::get('/report',[MyController::class,'showreport'])->name('reports.show');
+Route::get('/report', [MyController::class, 'showreport'])->name('reports.show');
 
 //Specific Report
-Route::get('/myreport/{id}',[MyController::class,'specificreport'])->name('report.specific');
+Route::get('/myreport/{id}', [MyController::class, 'specificreport'])->name('report.specific');
 
 //Final Report
-Route::get('/myfinalreport/{id}/{date}',[MyController::class,'finalreport'])->name('report.final');
-
-
-
-
-
-
+Route::get('/myfinalreport/{id}/{date}', [MyController::class, 'finalreport'])->name('report.final');

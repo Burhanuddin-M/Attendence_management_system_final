@@ -11,8 +11,7 @@
 <script>
     function fetchData() {
         var employeeId = $('#employeeId').val(); // Assuming you have an input with the employee ID
-        var formData = $('#fetchDataForm').serialize();
-
+        var formData = document.getElementById("start_date").value;
         $.ajax({
             url: '/myfinalreport/' + employeeId + '/' + formData, // Concatenate employeeId to the URL
             method: 'GET',
