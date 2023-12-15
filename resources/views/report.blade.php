@@ -30,44 +30,15 @@
         <h1 class="text-center">Report</h1><br>
 
         <select id="employeeSelect" class="form-control text-center" name="name">
+            <option>Select the Employee</option>
             @foreach ($Employees as $Employee)
                 <option value="{{ $Employee->id }}">{{ $Employee->name }}</option>
             @endforeach
         </select>
 
         <div id="responseDiv">
-
-            @isset($MyEmployee)
             
-                <form action="" method="GET">
-                    <div class="form-group">
-                        <label for="start_date">Select Month and Year:</label>
-                        <input type="month" id="start_date" name="start_date" class="form-control form-control-sm">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-sm mt-4">Fetch Data</button>
-                </form>
-
-                <table id="example" class="display nowrap" style="width: 100%">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Type</th>
-                            <th>Overtime</th>
-                            <th>Salary</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach ($Employees as $Employee)
-                            <tr>
-                                <td>{{ $Employee->name }}</td>
-                                <td>{{ $Employee->name }}</td>
-                                <td>{{ $Employee->name }}</td>
-                                <td>{{ $Employee->name }}</td>
-                        @endforeach
-                    </tbody>
-                </table>
-            @endisset
+            
         </div>
 
 
@@ -104,7 +75,7 @@
 
                     // Make an Ajax request to your server
                     $.ajax({
-                        url: 'report/' +
+                        url: '/myreport/' +
                             selectedEmployeeId, // Adjust the URL based on your route definition
                         method: 'GET',
                         success: function(response) {

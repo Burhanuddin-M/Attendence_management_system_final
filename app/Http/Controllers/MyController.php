@@ -51,10 +51,17 @@ public function showreport(){
     return view('report',compact('Employees'));
 }
 
-public function specificreport($id){
+public function specificreport($id)
+{
     $MyEmployee = Employee::find($id);
-    return response()->json(compact('employee'));
+    return view('specificreport', compact('MyEmployee'));
 }
+
+public function finalreport($id,$date){
+    $employeeData = Employee::find($id);
+    return view('finalreport', compact('employeeData'));
+}
+
 
 
 }

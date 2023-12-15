@@ -54,7 +54,10 @@ Route::get('/transaction',[TransactionController::class,'showtransaction'])->nam
 Route::get('/report',[MyController::class,'showreport'])->name('reports.show');
 
 //Specific Report
-Route::get('/report/{id}',[MyController::class,'specificreport'])->name('report.specific');
+Route::get('/myreport/{id}',[MyController::class,'specificreport'])->name('report.specific');
+
+//Final Report
+Route::get('/myfinalreport/{id}/{date}',[MyController::class,'finalreport'])->name('report.final');
 
 
 
