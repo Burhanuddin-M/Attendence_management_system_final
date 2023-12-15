@@ -21,7 +21,6 @@
                 @if ($temp_date->equalTo(Carbon::parse($attendance[0]['date'])))
                     <td>{{ $attendance[0]['date'] }}</td>
                     <td>{{ $attendance[0]['type'] == 'ABSENT' ? '❌' : '✅' }}</td>
-
                     <td>{{ $attendance[0]['extra_hours'] }}</td>
                     <td>{{ $attendance[0]['total_amount'] }}</td>
                     @php
