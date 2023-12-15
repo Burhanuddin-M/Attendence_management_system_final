@@ -31,7 +31,7 @@
 
         <div class="text-center">
             <table class="table table-bordered">
-              
+
                 <tr>
                     <td colspan="4" class="text-center">Today :- {{ \Carbon\Carbon::now()->format('jS F') }}</td>
                 </tr>
@@ -46,10 +46,10 @@
                     <td class="text-danger font-weight-bold">15,000</td>
                 </tr>
             </table>
-            
+
         </div>
-        
-        
+
+
 
 
         <form action="" method="GET">
@@ -103,7 +103,11 @@
             // Initialize DataTable
             var dataTable = $('#example').DataTable({
                 scrollX: true,
-                scrollY: true
+                scrollY: true,
+                columnDefs: [
+                    { targets: [0, 3], orderable: false },
+                ],
+                order: []
             });
 
         });
