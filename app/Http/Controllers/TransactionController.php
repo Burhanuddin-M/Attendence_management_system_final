@@ -27,7 +27,7 @@ public function showTransaction(Request $request)
     
     //Porfolio according to current Date
     $DebitsAmount = Transaction::whereDate('created_at', today())->where('type', 'DEBIT')->sum('amount');
-    $CreditsAmount = Transaction::whereDate('created_at',Carbon::now())->where('type','CREDIT')->sum('amount');
+    $CreditsAmount = Transaction::whereDate('created_at',Carbon::now())->where('type','DEPOSIT')->sum('amount');
     $Portfolio = $CreditsAmount - $DebitsAmount;
 
 

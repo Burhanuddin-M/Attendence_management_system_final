@@ -34,7 +34,7 @@ class MyController extends Controller
         $transaction = Transaction::create([
             'employee_id' => $id,
             'amount' => $amount,
-            'type' => "CREDIT",
+            'type' => "DEPOSIT",
             'note' => $message,
         ]);
 

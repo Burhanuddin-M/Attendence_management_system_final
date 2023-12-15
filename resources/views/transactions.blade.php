@@ -41,12 +41,12 @@
                     <th>Portfolio</th>
                 </tr>
                 <tr>
-                    <td class="text-danger font-weight-bold">{{$DebitsAmount}}</td>
-                    <td class="text-success font-weight-bold">{{$CreditsAmount}}</td>
+                    <td class="text-danger font-weight-bold">{{ $DebitsAmount }}</td>
+                    <td class="text-success font-weight-bold">{{ $CreditsAmount }}</td>
                     <td class="{{ $Portfolio < 0 ? 'text-danger font-weight-bold' : 'text-success font-weight-bold' }}">
                         {{ abs($Portfolio) }}
                     </td>
-                    
+
                 </tr>
             </table>
 
@@ -88,6 +88,8 @@
                         <td>
                             @if ($transaction->type == 'DEBIT')
                                 <b class="text-danger">{{ $transaction->amount }}</b>
+                            @elseif($transaction->type == 'CREDIT')
+                                <b class="text-primary">{{ $transaction->amount }}</b>
                             @else
                                 <b class="text-success">{{ $transaction->amount }}</b>
                             @endif
@@ -107,9 +109,10 @@
             var dataTable = $('#example').DataTable({
                 scrollX: true,
                 scrollY: true,
-                columnDefs: [
-                    { targets: [0, 3], orderable: false },
-                ],
+                columnDefs: [{
+                    targets: [0, 3],
+                    orderable: false
+                }, ],
                 order: []
             });
 
