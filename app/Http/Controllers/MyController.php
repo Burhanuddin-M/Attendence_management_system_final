@@ -16,12 +16,12 @@ public function index(){
     return view('index');
 }
 
-public function allowance(){
+public function deposits(){
     $Employees = Employee::all();
-        return view('allowance',compact('Employees'));
+        return view('deposits',compact('Employees'));
 }
 
-public function post_allowance(Request $request,$id){
+public function post_deposits(Request $request,$id){
 
     $amount = $request->amount;
     $message = $request->message;
@@ -43,9 +43,11 @@ public function post_allowance(Request $request,$id){
 
     $Message = $Employee->name ." was deposited the amount of ".$amount;
 
-    return redirect('allowance')->with('success',$Message);
+    return redirect('deposits')->with('success',$Message);
 }
 
-
+public function showreport(){
+    return view('report');
+}
 
 }

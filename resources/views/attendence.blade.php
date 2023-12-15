@@ -22,13 +22,13 @@
 
 
         @if (session('success'))
-                <script>
-                    Swal.fire({
-                        title: "Marked!",
-                        text: "{{ session('success') }}",
-                        icon: "success"
-                    });
-                </script>
+            <script>
+                Swal.fire({
+                    title: "Marked!",
+                    text: "{{ session('success') }}",
+                    icon: "success"
+                });
+            </script>
         @endif
 
         <!-- Table with Edit Column -->
@@ -39,6 +39,7 @@
                     <th>Name</th>
                     <th>{{ \Carbon\Carbon::now()->format('jS') }}</th>
                     <th>Overtime</th>
+                    <th>Withdraw</th>
                     <th>Submit</th>
                 </tr>
 
@@ -75,6 +76,10 @@
                                     @endfor
                                 </select>
                             </td>
+                            <td>
+                                <input type="number" class="form-control form-control-sm" id="amount" name="withdraw">
+                            </td>
+                            
 
                             <td>
                                 <button type="submit" class="btn btn-sm bg-primary text-white">Save</button>
@@ -90,16 +95,16 @@
     </div>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#your-table-id').DataTable({
                 scrollY: '50vh', // Vertical scrolling with viewport height
-                scrollX: true,    // Horizontal scrolling
-                paging: false,     // Disable pagination
-                searching: false   // Disable search box
+                scrollX: true, // Horizontal scrolling
+                paging: false, // Disable pagination
+                searching: false // Disable search box
             });
         });
     </script>
-    
+
 
     <!-- Add more edit modals as needed -->
 

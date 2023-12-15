@@ -72,7 +72,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ route('Post_allowance', ['id' => $employee->id]) }}"
+                                        <form action="{{ route('Post_deposits', ['id' => $employee->id]) }}"
                                             method="POST">
                                             @csrf
 

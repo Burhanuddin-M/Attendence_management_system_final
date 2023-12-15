@@ -36,10 +36,10 @@ Route::put('/EditEmployee/{id}',[EmployeeController::class,'PostEditEmployee'])-
 Route::get('/masterTable',[EmployeeController::class,'masterTable'])->name('masterTable');
 
 //Allowance 
-Route::get('/allowance',[MyController::class,'allowance'])->name('allowance');
+Route::get('/deposits',[MyController::class,'deposits'])->name('deposits');
 
 //Post Allowance 
-Route::post('/allowance/{id}',[MyController::class,'post_allowance'])->name('Post_allowance');
+Route::post('/deposits/{id}',[MyController::class,'post_deposits'])->name('Post_deposits');
 
 //Attendence
 Route::get('/attendence',[AttendanceController::class,'attendence'])->name('attendence');
@@ -49,6 +49,9 @@ Route::post('/attendence/{id}',[AttendanceController::class,'attendencePost'])->
 
 //Attendence
 Route::get('/transaction',[TransactionController::class,'showtransaction'])->name('transaction.show');
+
+//Attendence
+Route::get('/report',[MyController::class,'showreport'])->name('reports.show');
 
 
 
