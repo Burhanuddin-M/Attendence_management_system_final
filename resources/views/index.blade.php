@@ -23,6 +23,7 @@
             <a href="{{route('attendence')}}" class="btn btn-outline-primary btn-block fw-bold">Attendance</a><br><br>
             <a href="{{route('masterTable')}}" class="btn btn-outline-primary btn-block  fw-bold">Master Table</a><br><br>
             <a href="{{route('allowance')}}" class="btn btn-outline-primary btn-block fw-bold">Allowance</a><br><br>
+            <a href="{{route('transaction.show')}}" class="btn btn-outline-primary btn-block fw-bold">Transactions</a><br><br>
         </div>
     </div>
     

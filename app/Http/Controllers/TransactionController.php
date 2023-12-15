@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Transaction;
 
 class TransactionController extends Controller
 {
-    
+    public function showtransaction(){
+
+        $transactions = Transaction::latest()->get();
+        return view('transactions',compact('transactions'));
+
+    }
 }

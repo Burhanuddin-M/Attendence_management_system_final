@@ -47,7 +47,8 @@ Route::get('/attendence',[AttendanceController::class,'attendence'])->name('atte
 //Post Attendence
 Route::post('/attendence/{id}',[AttendanceController::class,'attendencePost'])->name('attendencePost');
 
-
+//Attendence
+Route::get('/transaction',[TransactionController::class,'showtransaction'])->name('transaction.show');
 
 
 
