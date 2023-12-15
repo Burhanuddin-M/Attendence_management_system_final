@@ -23,8 +23,8 @@
         <table class="table table-hover table-striped">
             <thead>
                 <tr>
-                    <th>NO</th>
-                    <th>Employee Name</th>
+                    <th>SR</th>
+                    <th>Employee</th>
                     <th>P</th>
                     <th>A</th>
                     <th>Portfolio</th>

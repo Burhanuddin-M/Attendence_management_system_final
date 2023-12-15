@@ -38,10 +38,10 @@ public function post_allowance(Request $request,$id){
 
     $Employee = Employee::find($id);
     $portfolio_amount = $Employee->amount_portfolio;
-    $Employee->amount_portfolio = $portfolio_amount - $amount;
+    $Employee->amount_portfolio = $portfolio_amount + $amount;
     $Employee->save();
 
-    $Message = $Employee->name ." was taken the amount of ".$amount;
+    $Message = $Employee->name ." was deposited the amount of ".$amount;
 
     return redirect('allowance')->with('success',$Message);
 }

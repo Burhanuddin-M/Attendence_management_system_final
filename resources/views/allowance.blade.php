@@ -18,7 +18,7 @@
         <button class="btn btn-primary text-center">
             <a href="{{ route('attendence.index') }}" class="text-white text-decoration-none">←</a>
         </button>
-        <h1 class="text-center">Employees Allowance</h1><br>
+        <h1 class="text-center">Deposits</h1><br>
 
         @if (session('success'))
             <script>
@@ -36,9 +36,9 @@
         <table class="table table-hover table-striped">
             <thead>
                 <tr>
-                    <th>SR NO</th>
-                    <th>Employee Name</th>
-                    <th>Current portfolio</th>
+                    <th>SR</th>
+                    <th>Employee</th>
+                    <th>Portfolio</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -82,15 +82,17 @@
                                                     {{ abs($employee->amount_portfolio) }}
                                                 </h3>
                                             </div>
+                                        
+
                                             <div class="mb-3">
-                                                <label for="employeeName" class="form-label">Allowance Amount</label>
+                                                <label for="employeeName" class="form-label">Deposits</label>
                                                 <input type="number" class="form-control" id="amount"
-                                                    placeholder="Write the Allowance amount" name="amount">
+                                                     name="amount" placeholder="Write the amount..">
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="message" class="form-label">Message</label>
-                                                <textarea class="form-control" id="message" placeholder="Write the message" name="message"></textarea>
+                                                <textarea class="form-control" id="message" name="message">{{$employee->name}} deposited the amount..</textarea>
                                             </div>
                                             
 

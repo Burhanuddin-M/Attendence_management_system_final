@@ -86,8 +86,7 @@
                 <tr>
                     <th>SR NO</th>
                     <th>Employee Name</th>
-                    <th>Contact Number</th>
-                    <th>Salary (Per day)</th>
+                    <th>Salary</th>
                     <th>Edit</th> <!-- New Edit Column Header -->
                 </tr>
             </thead>
@@ -97,7 +96,6 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $employee->name }}</td>
-                        <td>{{ $employee->contact_no }}</td>
                         <td>{{ $employee->salary_per_day }}</td>
                         <td><button class="btn" data-toggle="modal" data-target="{{ '#editModal' . $employee->id }}"><i
                                     class="fas fa-edit"></i></button></td>

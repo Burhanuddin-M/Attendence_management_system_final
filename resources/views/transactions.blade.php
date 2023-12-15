@@ -23,6 +23,9 @@
 <body><br>
 
     <div class="container">
+        <button class="btn btn-primary text-center">
+            <a href="{{ route('attendence.index') }}" class="text-white text-decoration-none">←</a>
+        </button>
         <h1 class="text-center">Transactions</h1><br>
 
         <form action="" method="GET">
@@ -36,17 +39,18 @@
             </div>
             <button type="submit" class="btn btn-primary btn-sm mt-4">Fetch Data</button>
         </form>
-        
-        
 
 
-        <br><table id="example" class="display nowrap" style="width: 100%">
+
+
+        <br>
+        <table id="example" class="display nowrap" style="width: 100%">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Amount</th>
-                    <th>Message</th>
                     <th>Time</th>
+                    <th>Message</th>
                 </tr>
             </thead>
 
@@ -61,8 +65,9 @@
                                 <b class="text-success">{{ $transaction->amount }}</b>
                             @endif
                         </td>
-                        <td>{{ $transaction->note }}</td>
                         <td>{{ $transaction->created_at->diffForHumans() }}</td>
+
+                        <td>{{ $transaction->note }}</td>
                     </tr>
                 @endforeach
             </tbody>
@@ -70,7 +75,7 @@
     </div>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Initialize DataTable
             var dataTable = $('#example').DataTable({
                 scrollX: true,

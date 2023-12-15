@@ -17,7 +17,7 @@
         <button class="btn btn-primary text-center">
             <a href="{{ route('attendence.index') }}" class="text-white text-decoration-none">←</a>
         </button>
-        <h1 class="text-center">Today's Attendence</h1><br>
+        <h1 class="text-center">Attendence</h1><br>
         <h3 class="text-center">{{ \Carbon\Carbon::now()->format('F Y') }}</h3><br>
 
 
@@ -35,9 +35,9 @@
         <table class="table table-hover table-striped">
             <thead>
                 <tr>
-                    <th>SR NO</th>
-                    <th>Employee Name</th>
-                    <th>{{ \Carbon\Carbon::now()->format('jS F') }}</th>
+                    <th>NO</th>
+                    <th>Name</th>
+                    <th>{{ \Carbon\Carbon::now()->format('jS') }}</th>
                     <th>Overtime</th>
                     <th>Submit</th>
                 </tr>
@@ -89,7 +89,17 @@
         </table>
     </div>
 
-
+    <script>
+        $(document).ready(function () {
+            $('#your-table-id').DataTable({
+                scrollY: '50vh', // Vertical scrolling with viewport height
+                scrollX: true,    // Horizontal scrolling
+                paging: false,     // Disable pagination
+                searching: false   // Disable search box
+            });
+        });
+    </script>
+    
 
     <!-- Add more edit modals as needed -->
 
