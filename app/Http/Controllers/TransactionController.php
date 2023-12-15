@@ -7,10 +7,10 @@ use App\Models\Transaction;
 
 class TransactionController extends Controller
 {
-    public function showtransaction(){
+    public function showtransaction()
+{
+    $transactions = Transaction::latest()->get();
+    return view('transactions', compact('transactions'));
+}
 
-        $transactions = Transaction::latest()->get();
-        return view('transactions',compact('transactions'));
-
-    }
 }

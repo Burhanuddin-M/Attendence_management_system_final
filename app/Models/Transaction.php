@@ -9,7 +9,7 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    //public $timestamps = false;
+    public $timestamps = true;
 
     const DEBIT = "DEBIT", CREDIT = "CREDIT";
 
