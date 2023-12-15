@@ -17,8 +17,8 @@
         <button class="btn btn-primary text-center">
             <a href="{{ route('attendence.index') }}" class="text-white text-decoration-none">←</a>
         </button>
-        <h1 class="text-center">Attendence</h1><br>
-        <h3 class="text-center">{{ \Carbon\Carbon::now()->format('F Y') }}</h3><br>
+        {{-- <h1 class="text-center">Attendence</h1><br>
+        <h3 class="text-center">{{ \Carbon\Carbon::now()->format('F Y') }}</h3><br> --}}
 
 
         @if (session('success'))

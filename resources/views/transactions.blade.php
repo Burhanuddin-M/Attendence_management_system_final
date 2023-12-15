@@ -28,6 +28,30 @@
         </button>
         <h1 class="text-center">Transactions</h1><br>
 
+
+        <div class="text-center">
+            <table class="table table-bordered">
+              
+                <tr>
+                    <td colspan="4" class="text-center">Today :- {{ \Carbon\Carbon::now()->format('jS F') }}</td>
+                </tr>
+                <tr>
+                    <th>Given</th>
+                    <th>Received</th>
+                    <th>Portfolio</th>
+                </tr>
+                <tr>
+                    <td class="text-danger font-weight-bold">20,000</td>
+                    <td class="text-success font-weight-bold">5,000</td>
+                    <td class="text-danger font-weight-bold">15,000</td>
+                </tr>
+            </table>
+            
+        </div>
+        
+        
+
+
         <form action="" method="GET">
             <div class="form-group">
                 <label for="start_date">Start Date:</label>

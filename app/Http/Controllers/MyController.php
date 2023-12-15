@@ -47,7 +47,14 @@ public function post_deposits(Request $request,$id){
 }
 
 public function showreport(){
-    return view('report');
+    $Employees = Employee::all();
+    return view('report',compact('Employees'));
 }
+
+public function specificreport($id){
+    $MyEmployee = Employee::find($id);
+    return response()->json(compact('employee'));
+}
+
 
 }

@@ -50,8 +50,11 @@ Route::post('/attendence/{id}',[AttendanceController::class,'attendencePost'])->
 //Attendence
 Route::get('/transaction',[TransactionController::class,'showtransaction'])->name('transaction.show');
 
-//Attendence
+//Report
 Route::get('/report',[MyController::class,'showreport'])->name('reports.show');
+
+//Specific Report
+Route::get('/report/{id}',[MyController::class,'specificreport'])->name('report.specific');
 
 
 
