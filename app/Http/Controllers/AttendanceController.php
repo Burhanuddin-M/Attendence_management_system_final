@@ -12,15 +12,17 @@ class AttendanceController extends Controller
 {
     public function attendence()
     {
-        $employees = Employee::all();
+        $employees = Employee::with(['attendance' => function ($query) {
+            $query = $query->where('date', Carbon::now()->format('Y-m-d'));
+        }])->get();
 
-        $attendances = $employees->load('attendance');
+        // $attendances = $employees->load('attendance');
 
-        $status = $attendances->map(function ($employee) {
-            return $employee->attendance->firstWhere('date', Carbon::now()->format('Y-m-d'));
-        });
+        // $status = $attendances->map(function ($employee) {
+        //     return $employee->attendance->firstWhere('date', Carbon::now()->format('Y-m-d'));
+        // });
 
-        return view('attendence', compact('employees', 'status'));
+        return view('attendence', compact('employees'));
     }
 
 
@@ -36,27 +38,34 @@ class AttendanceController extends Controller
 
         $formattedDate = Carbon::now()->toDateString();
 
-        $attendance = Attendance::create([
-            'employee_id' => $id,
-            'type' => 'PRESENT',
-            'date' => $formattedDate,
-        ]);
-
-
-        if ($attendance->type == Attendance::PRESENT) {
-            $employee_salary = $employee->salary_per_day;
-            if ($request->has('hours') && !is_null($request->hours) && $request->hours > 0) {
-                $employee_salary = $employee_salary + (($employee->salary_per_day / 8) + $request->hours);
+        if ($request->has('attendance')) {
+            $attendance = Attendance::create([
+                'employee_id' => $id,
+                'type' => 'PRESENT',
+                'date' => $formattedDate,
+            ]);
+            if ($attendance->type == Attendance::PRESENT) {
+                $employee_salary = $employee->salary_per_day;
+                if ($request->has('hours') && !is_null($request->hours) && $request->hours > 0) {
+                    $employee_salary = $employee_salary + (($employee->salary_per_day / 8) * $request->hours);
+                }
+                Transaction::create(
+                    [
+                        'employee_id' => $employee->id,
+                        'amount' => $employee_salary,
+                        'type' => Transaction::CREDIT,
+                        'note' => 'salary',
+                    ]
+                );
             }
-            Transaction::create(
-                [
-                    'employee_id' => $employee->id,
-                    'amount' => $employee_salary,
-                    'type' => Transaction::CREDIT,
-                    'note' => 'salary',
-                ]
-            );
+        } else {
+            $attendance = Attendance::create([
+                'employee_id' => $id,
+                'type' => 'ABSENT',
+                'date' => $formattedDate,
+            ]);
         }
+
         if ($request->has('withdraw') && !is_null($request->withdraw) && $request->withdraw > 0) {
             Transaction::create(
                 [

@@ -54,26 +54,28 @@
                             <input type="hidden" name="name" value="{{ $employee->name }}">
                             <tr>
                                 <td>
-                                    @php
-                                        $employeeStatus = $status[$employee->id - 1] ?? null;
-                                    @endphp
-
-                                    @if ($employeeStatus)
+                                    @if (count($employee->attendance)>0)
                                         ✅
                                     @else
                                         ❌
                                     @endif
                                 </td>
                                 <td>
-                                    @if (!$employeeStatus)
-                                        {{ $employee->name }}
+
+                                    @if (count($employee->attendance)>0)
+                                        @if ($employee->attendance[0]->type == 'PRESENT')
+                                            {{ $employee->name." is marked Present" }}
+                                        @else
+                                            {{ $employee->name." is marked Absent" }}
+                                        @endif
+
                                     @else
                                         {{ $employee->name }}
                                     @endif
                                 </td>
 
                                 <td>
-                                    @if (!$employeeStatus)
+                                    @if (!(count($employee->attendance)>0))
                                         <div class="form-check form-switch">
                                             <input class="form-check-input attendance-switch" type="checkbox"
                                                 name="attendance" value="absent"
@@ -82,27 +84,24 @@
                                                 for="attendanceSwitch_{{ $loop->index }}">Absent</label>
                                         </div>
                                     @endif
+
                                 </td>
                                 <td class="overtime-row" style="display:none;">
-                                    @if (!$employeeStatus)
                                         <select class="form-select form-select-sm" id="numberSelect" name="hours">
                                             @for ($i = 0; $i <= 6; $i++)
                                                 <option name="hour">{{ $i }}</option>
                                             @endfor
                                         </select>
-                                    @endif
                                 </td>
                                 <td class="withdraw-row" style="display:none;">
-                                    @if (!$employeeStatus)
                                         <input type="number" class="form-control form-control-sm" id="amount"
                                             name="withdraw">
-                                    @endif
                                 </td>
                                 <td>
-                                    @if (!$employeeStatus)
-                                        <button type="button" class="btn btn-sm bg-primary text-white"
-                                            onclick="confirmSave()">Save</button>
+                                    @if (!(count($employee->attendance)>0))
+                                        <button type="submit" class="btn btn-sm bg-primary text-white">Save</button>
                                     @endif
+
                                 </td>
 
                             </tr>
@@ -122,17 +121,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 
     <script>
-        function confirmSave() {
-            var confirmResult = confirm("Are you sure you want to save?");
+        // function confirmSave() {
+        //     var confirmResult = confirm("Are you sure you want to save?");
 
-            if (confirmResult) {
-                // If the user clicks "OK" in the confirmation dialog
-                document.getElementById('myForm').submit(); // Replace 'yourFormId' with your actual form ID
-            } else {
-                // If the user clicks "Cancel" in the confirmation dialog
-                // You can add additional logic or leave it empty
-            }
-        }
+        //     if (confirmResult) {
+        //         // If the user clicks "OK" in the confirmation dialog
+        //         document.getElementById('myForm').submit(); // Replace 'yourFormId' with your actual form ID
+        //     } else {
+        //         // If the user clicks "Cancel" in the confirmation dialog
+        //         // You can add additional logic or leave it empty
+        //     }
+        // }
     </script>
 
     <script>
