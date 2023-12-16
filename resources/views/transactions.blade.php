@@ -15,12 +15,12 @@
 
 <style>
     div.dataTables_wrapper {
-        width: 1000px;
+        width: 100%;
         margin: 0 auto;
     }
 </style>
 
-<body><br>
+<body class="bg-light"><br>
 
     <div class="container">
         <button class="btn btn-primary text-center">
@@ -28,12 +28,10 @@
         </button>
         <h1 class="text-center">Transactions</h1><br>
 
-
-        <div class="text-center">
+        <div class="text-center mb-4">
             <table class="table table-bordered">
-
                 <tr>
-                    <td colspan="4" class="text-center">Today :- {{ \Carbon\Carbon::now()->format('jS F') }}</td>
+                    <td colspan="4" class="text-center">Today: {{ \Carbon\Carbon::now()->format('jS F') }}</td>
                 </tr>
                 <tr>
                     <th>Given</th>
@@ -46,76 +44,72 @@
                     <td class="{{ $Portfolio < 0 ? 'text-danger font-weight-bold' : 'text-success font-weight-bold' }}">
                         {{ abs($Portfolio) }}
                     </td>
-
                 </tr>
             </table>
-
         </div>
 
-
-
-
         <form action="" method="GET">
-            <div class="form-group">
-                <label for="start_date">Start Date:</label>
-                <input type="date" id="start_date" name="start_date" class="form-control form-control-sm">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="start_date">Start Date:</label>
+                        <input type="date" id="start_date" name="start_date" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="end_date">End Date:</label>
+                        <input type="date" id="end_date" name="end_date" class="form-control">
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="end_date">End Date:</label>
-                <input type="date" id="end_date" name="end_date" class="form-control form-control-sm">
-            </div>
-            <button type="submit" class="btn btn-primary btn-sm mt-4">Fetch Data</button>
+            <button type="submit" class="btn btn-primary btn-sm mt-3">Fetch Data</button>
         </form>
 
-
-
-
         <br>
-        <table id="example" class="display nowrap" style="width: 100%">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Amount</th>
-                    <th>Time</th>
-                    <th>Message</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach ($transactions as $transaction)
+        <div class="table-responsive">
+            <table id="example" class="table table-striped table-bordered">
+                <thead>
                     <tr>
-                        <td>{{ $transaction->Employee->name }}</td>
-                        <td>
-                            @if ($transaction->type == 'DEBIT')
-                                <b class="text-danger">{{ $transaction->amount }}</b>
-                            @elseif($transaction->type == 'CREDIT')
-                                <b class="text-primary">{{ $transaction->amount }}</b>
-                            @else
-                                <b class="text-success">{{ $transaction->amount }}</b>
-                            @endif
-                        </td>
-                        <td>{{ $transaction->created_at->diffForHumans() }}</td>
-
-                        <td>{{ $transaction->note }}</td>
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>Time</th>
+                        <th>Message</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach ($transactions as $transaction)
+                        <tr>
+                            <td>{{ $transaction->Employee->name }}</td>
+                            <td>
+                                @if ($transaction->type == 'DEBIT')
+                                    <b class="text-danger">{{ $transaction->amount }}</b>
+                                @elseif($transaction->type == 'CREDIT')
+                                    <b class="text-primary">{{ $transaction->amount }}</b>
+                                @else
+                                    <b class="text-success">{{ $transaction->amount }}</b>
+                                @endif
+                            </td>
+                            <td>{{ $transaction->created_at->diffForHumans() }}</td>
+                            <td>{{ $transaction->note }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script>
         $(document).ready(function() {
             // Initialize DataTable
             var dataTable = $('#example').DataTable({
-                scrollX: true,
-                scrollY: true,
+                responsive: true,
                 columnDefs: [{
                     targets: [0, 3],
                     orderable: false
-                }, ],
+                }],
                 order: []
             });
-
         });
     </script>
 

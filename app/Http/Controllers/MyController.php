@@ -28,7 +28,7 @@ class MyController extends Controller
     {
 
         $amount = $request->amount;
-        $message = $request->message;
+        $message = $request->message." - ".$amount;
 
 
         $transaction = Transaction::create([

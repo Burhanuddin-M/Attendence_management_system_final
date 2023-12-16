@@ -89,7 +89,7 @@
                                                 <div class="mb-3">
                                                     <label for="message" class="form-label">Message</label>
                                                     <textarea class="form-control" id="message" name="message"
-                                                        placeholder="{{ $employee->name }} deposited the amount.."></textarea>
+                                                        >I Deposited</textarea>
                                                 </div>
 
                                                 <div class="modal-footer">
