@@ -37,6 +37,7 @@ public function attendencePost(Request $request, $id)
 
     $attendance = Attendance::create([
         'employee_id' => $id,
+        'type'=>'PRESENT',
         'date' => $formattedDate,
     ]);    
 
