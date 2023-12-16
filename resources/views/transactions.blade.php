@@ -7,6 +7,7 @@
     <title>Employee's Master Table</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
 
     <!-- Use the slim version of jQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -23,11 +24,6 @@
 <body class="bg-light"><br>
 
     <div class="container">
-        <button class="btn btn-primary text-center">
-            <a href="{{ route('attendence.index') }}" class="text-white text-decoration-none">←</a>
-        </button>
-        <h1 class="text-center">Transactions</h1><br>
-
         <div class="text-center mb-4">
             <table class="table table-bordered">
                 <tr>
@@ -48,23 +44,47 @@
             </table>
         </div>
 
-        <form action="" method="GET">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="start_date">Start Date:</label>
-                        <input type="date" id="start_date" name="start_date" class="form-control">
+        <!-- Customize Date Button -->
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#customDateModal">
+            Customize Date
+        </button>
+
+        <!-- Modal -->
+        <div class="modal" id="customDateModal" tabindex="-1" role="dialog" aria-labelledby="customDateModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="customDateModalLabel">Customize Date</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="end_date">End Date:</label>
-                        <input type="date" id="end_date" name="end_date" class="form-control">
+                    <div class="modal-body">
+                        <!-- Custom Date Form -->
+                        <form action="" method="GET">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="start_date">Start Date:</label>
+                                        <input type="date" id="start_date" name="start_date" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="end_date">End Date:</label>
+                                        <input type="date" id="end_date" name="end_date" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm mt-3">Fetch Data</button>
+                        </form>
+                        <!-- End Custom Date Form -->
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-sm mt-3">Fetch Data</button>
-        </form>
+        </div>
+        <!-- End Modal -->
 
         <br>
         <div class="table-responsive">
