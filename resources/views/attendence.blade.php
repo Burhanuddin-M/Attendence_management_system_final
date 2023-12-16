@@ -14,13 +14,14 @@
 <body class="bg-light"><br>
 
     <div class="container">
-        <button class="btn btn-primary text-center">
-            <a href="{{ route('attendence.index') }}" class="text-white text-decoration-none">←</a>
-        </button>
-        <div class="text-center">
-            <h1>Attendance</h1>
-            <h3>{{ \Carbon\Carbon::now()->format('jS F Y') }}</h3>
-        </div>
+        <div class="d-flex justify-content-between">
+            <button class="btn btn-primary">
+                <a href="{{ route('attendence.index') }}" class="text-white text-decoration-none">←</a>
+            </button>
+            <div class="text-center">
+                <h1>{{ \Carbon\Carbon::now()->format('jS F') }} attendance</h3>
+            </div>
+        </div><br>
 
         @if (session('success'))
             <script>
@@ -33,54 +34,53 @@
         @endif
 
         <!-- Table with Edit Column -->
-        <table class="table table-hover table-striped">
-            <thead>
-                <tr>
-                    <th>NO</th>
-                    <th>Name</th>
-                    <th>{{ \Carbon\Carbon::now()->format('jS') }}</th>
-                    <th>Overtime</th>
-                    <th>Withdraw</th>
-                    <th>Submit</th>
-                </tr>
-            </thead>
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Name</th>
+                        <th>{{ \Carbon\Carbon::now()->format('jS') }}</th>
+                        <th class="overtime-header" style="display:none;">Overtime</th>
+                        <th class="withdraw-header" style="display:none;">Withdraw</th>
+                        <th>Submit</th>
+                    </tr>
+                </thead>
 
-            <tbody>
-                @foreach ($Employees as $employee)
-                    <form action="{{ route('attendencePost', ['id' => $employee->id]) }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="name" value="{{ $employee->name }}">
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $employee->name }}</td>
-                            <td>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="attendance" value="present">
-                                    <label class="form-check-label text-success" for="present_{{ $loop->index }}"><b>P</b></label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="attendance" value="absent" checked>
-                                    <label class="form-check-label text-danger" for="absent_{{ $loop->index }}"><b>A</b></label>
-                                </div>
-                            </td>
-                            <td>
-                                <select class="form-select form-select-sm" id="numberSelect" name="hours">
-                                    @for ($i = 0; $i <= 6; $i++)
-                                        <option name="hour">{{ $i }}</option>
-                                    @endfor
-                                </select>
-                            </td>
-                            <td>
-                                <input type="number" class="form-control form-control-sm" id="amount" name="withdraw">
-                            </td>
-                            <td>
-                                <button type="submit" class="btn btn-sm bg-primary text-white">Save</button>
-                            </td>
-                        </tr>
-                    </form>
-                @endforeach
-            </tbody>
-        </table>
+                <tbody>
+                    @foreach ($Employees as $employee)
+                        <form action="{{ route('attendencePost', ['id' => $employee->id]) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="name" value="{{ $employee->name }}">
+                            <tr>
+                                <td>✅</td>
+                                <td>{{ $employee->name }}</td>
+                                <td>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input attendance-switch" type="checkbox" name="attendance"
+                                            value="absent" id="attendanceSwitch_{{ $loop->index }}">
+                                        <label class="form-check-label" for="attendanceSwitch_{{ $loop->index }}">Absent</label>
+                                    </div>
+                                </td>
+                                <td class="overtime-row" style="display:none;">
+                                    <select class="form-select form-select-sm" id="numberSelect" name="hours">
+                                        @for ($i = 0; $i <= 6; $i++)
+                                            <option name="hour">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                </td>
+                                <td class="withdraw-row" style="display:none;">
+                                    <input type="number" class="form-control form-control-sm" id="amount" name="withdraw">
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-sm bg-primary text-white">Save</button>
+                                </td>
+                            </tr>
+                        </form>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <!-- Add more edit modals as needed -->
@@ -90,7 +90,46 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
     <!-- Font Awesome Icons -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+
+    <script>
+        // Add JavaScript to set the initial state and update the label text based on the switch state
+        document.addEventListener('DOMContentLoaded', function () {
+            let switches = document.querySelectorAll('.attendance-switch');
+            let overtimeHeader = document.querySelector('.overtime-header');
+            let withdrawHeader = document.querySelector('.withdraw-header');
+
+            switches.forEach(function (switchElem) {
+                // Set the initial state to "Absent"
+                switchElem.checked = false;
+                switchElem.parentElement.classList.add('text-danger');
+                switchElem.parentElement.classList.remove('text-success');
+
+                switchElem.addEventListener('change', function () {
+                    let label = switchElem.nextElementSibling; // Get the label element
+                    let overtimeRow = switchElem.closest('tr').querySelector('.overtime-row');
+                    let withdrawRow = switchElem.closest('tr').querySelector('.withdraw-row');
+
+                    if (switchElem.checked) {
+                        label.innerText = 'Present';
+                        switchElem.parentElement.classList.remove('text-danger');
+                        switchElem.parentElement.classList.add('text-success');
+                        overtimeRow.style.display = 'table-cell';
+                        withdrawRow.style.display = 'table-cell';
+                        overtimeHeader.style.display = 'table-cell';
+                        withdrawHeader.style.display = 'table-cell';
+                    } else {
+                        label.innerText = 'Absent';
+                        switchElem.parentElement.classList.remove('text-success');
+                        switchElem.parentElement.classList.add('text-danger');
+                        overtimeRow.style.display = 'none';
+                        withdrawRow.style.display = 'none';
+                        overtimeHeader.style.display = 'none';
+                        withdrawHeader.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
-0
