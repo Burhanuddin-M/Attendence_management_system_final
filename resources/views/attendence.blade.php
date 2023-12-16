@@ -19,7 +19,7 @@
                 <a href="{{ route('attendence.index') }}" class="text-white text-decoration-none">←</a>
             </button>
             <div class="text-center">
-                <h1>{{ \Carbon\Carbon::now()->format('jS F') }} attendance</h3>
+                <h1>{{ \Carbon\Carbon::now()->format('jS F') }} Attendance</h3>
             </div>
         </div><br>
 
