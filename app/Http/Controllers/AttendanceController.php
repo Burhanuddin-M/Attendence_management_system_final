@@ -45,7 +45,7 @@ class AttendanceController extends Controller
 
         if ($attendance->type == Attendance::PRESENT) {
             $employee_salary = $employee->salary_per_day;
-            if ($request->has('hours')) {
+            if ($request->has('hours') && !is_null($request->hours) && $request->hours > 0) {
                 $employee_salary = $employee_salary + (($employee->salary_per_day / 8) + $request->hours);
             }
             Transaction::create(
@@ -57,7 +57,7 @@ class AttendanceController extends Controller
                 ]
             );
         }
-        if ($request->has('withdraw')) {
+        if ($request->has('withdraw') && !is_null($request->withdraw) && $request->withdraw > 0) {
             Transaction::create(
                 [
                     'employee_id' => $employee->id,
