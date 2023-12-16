@@ -27,7 +27,7 @@
         <div class="text-center mb-4">
             <table class="table table-bordered">
                 <tr>
-                    <td colspan="4" class="text-center">Today: {{ \Carbon\Carbon::now()->format('jS F') }}</td>
+                    <td colspan="4" class="text-center"><b>Today: {{ \Carbon\Carbon::now()->format('jS F') }}</b></td>
                 </tr>
                 <tr>
                     <th>Given</th>
@@ -45,9 +45,11 @@
         </div>
 
         <!-- Customize Date Button -->
-        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#customDateModal">
-            Customize Date
-        </button>
+        <div class="row justify-content-center">
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#customDateModal">
+                Customize Date
+            </button>
+        </div>
 
         <!-- Modal -->
         <div class="modal" id="customDateModal" tabindex="-1" role="dialog" aria-labelledby="customDateModalLabel"
