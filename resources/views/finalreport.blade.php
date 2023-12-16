@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee's Master Table</title>
+    <title>Reports of the Employee</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
@@ -23,7 +23,7 @@
 
 <style>
     div.dataTables_wrapper {
-        width: 300px;
+        width: 320px;
         margin: 0 auto;
     }
 </style>
@@ -91,14 +91,15 @@
 
 
     <script>
-        $(document).ready(function() {
-            $('#example').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'excel', 'pdf', 'print'
-                ]
-            });
+       $(document).ready(function() {
+        $('#example').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'pdf', 'print'
+            ],
+            searching: false  // Disable search feature
         });
+    });
     </script>
 
     
