@@ -62,8 +62,10 @@ class MyController extends Controller
         return view('specificreport', compact('MyEmployee'));
     }
 
-    public function finalreport($id, $date)
+    
+    public function finalreport($id,request $request)
     {
+        $date = $request->date;
         $start_date = Carbon::parse($date)->startOfMonth();
         $end_date = Carbon::parse($date)->endOfMonth();
         $employeeData = Employee::find($id);

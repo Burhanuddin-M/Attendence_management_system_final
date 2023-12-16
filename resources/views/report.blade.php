@@ -29,7 +29,7 @@
 
         <h1 class="text-center">Report</h1><br>
 
-        <select id="employeeSelect" class="form-control text-center" name="name">
+        {{-- <select id="employeeSelect" class="form-control text-center" name="name">
             <option>Select the Employee</option>
             @foreach ($Employees as $Employee)
                 <option value="{{ $Employee->id }}">{{ $Employee->name }}</option>
@@ -39,62 +39,47 @@
         <div id="responseDiv">
             
             
-        </div>
+        </div> --}}
+
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>SR</th>
+                    <th>Employee</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
 
 
 
+                @foreach ($Employees as $employee)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $employee->name }}</td>
+
+                        <td>
+                            <a href="{{route('report.specific',['id'=>$employee->id])}}" class="btn btn-sm btn-primary">OPEN</a>
+                        </td>
+                        
+
+                        
+                    </tr>
+                @endforeach
 
 
+            </tbody>
+        </table>
 
-
-
-        {{-- <br>
-
-            
     </div>
 
-    <script>
-        $(document).ready(function() {
-            // Initialize DataTable
-            var dataTable = $('#example').DataTable({
-                scrollX: true,
-                scrollY: true
-            });
 
-        });
-    </script>
 
-    {{-- Ajax Resonse --}}
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                // Attach an event listener to the select element
-                $('#employeeSelect').change(function() {
-                    // Get the selected value
-                    var selectedEmployeeId = $(this).val();
+  
 
-                    // Make an Ajax request to your server
-                    $.ajax({
-                        url: '/myreport/' +
-                            selectedEmployeeId, // Adjust the URL based on your route definition
-                        method: 'GET',
-                        success: function(response) {
-                            // Update the content of the responseDiv with the received response
-                            $('#responseDiv').html(response);
-                        },
-                        error: function(xhr, status, error) {
-                            console.error('Ajax request failed:', error);
-                            // Optionally, you can also handle the error in the responseDiv
-                            $('#responseDiv').html('Failed to get the response. Please try again.');
-                        }
-
-                    });
-                });
-            });
-        </script>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 
 </html>
