@@ -73,7 +73,8 @@
                         <td>{{ $employee->attendance->where('type', 'ABSENT')->count() }}</td>
 
                         <td class="portfolio @if ($employee->amount_portfolio < 0) negative @else positive @endif">
-                            {{ abs($employee->amount_portfolio) }}
+                            {{'₹ '. number_format(round(abs($employee->amount_portfolio))) }}
+
                         </td>
                     </tr>
                 @endforeach
