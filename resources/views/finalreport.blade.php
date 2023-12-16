@@ -83,7 +83,7 @@
 
             .btn-pdf,
             .btn-print,
-            .btn-primary { 
+            .btn-primary {
                 font-size: 12px;
             }
         }
@@ -108,19 +108,19 @@
                         <th>Salary</th>
                     </tr>
                 </thead>
-    
+
                 <tbody>
                     @php
                         use Carbon\Carbon;
                         $temp_date = $start_date;
                         $cross = '<div>&#10060</div>';
                     @endphp
-    
+
                     @while ($temp_date->lessThanOrEqualTo($end_date) && $temp_date->lessThanOrEqualTo(Carbon::now()))
                         <tr>
                             @if (count($attendance) > 0)
                                 @if ($temp_date->equalTo(Carbon::parse($attendance[0]['date'])))
-                                    <td>{{ $attendance[0]['date'] }}</td>
+                                    <td>{{ Carbon::parse($attendance[0]['date'])->format('jS M Y') }}</td>
                                     <td>{{ $attendance[0]['type'] == 'PRESENT' ? '✅' : '❌' }}</td>
                                     <td>{{ $attendance[0]['extra_hours'] }}</td>
                                     <td>{{ $attendance[0]['total_amount'] }}</td>
@@ -128,7 +128,7 @@
                                         array_shift($attendance);
                                     @endphp
                                 @else
-                                    <td>{{ $temp_date }}</td>
+                                    <td>{{ Carbon::parse($temp_date)->format('jS M Y') }}</td>
                                     <td>-</td>
                                     <td>-</td>
                                     <td>-</td>
@@ -145,7 +145,7 @@
                         @endphp
                     @endwhile
                 </tbody>
-    
+
                 <tfoot>
                     <tr>
                         <td>-</td>
