@@ -30,7 +30,7 @@ Route::get('/addEmployee', [EmployeeController::class, 'AddEmployee'])->name('ad
 Route::post('/addEmployee', [EmployeeController::class, 'PostAddEmployee'])->name('PostAddEmployee');
 
 //Edit Post Beneficiary
-Route::put('/EditEmployee/{id}', [EmployeeController::class, 'PostEditEmployee'])->name('PostEditEmployee');
+Route::post('EditEmployee/{id}', [EmployeeController::class, 'PostEditEmployee'])->name('PostEditEmployee');
 
 //Show Master Table
 Route::get('/masterTable', [EmployeeController::class, 'masterTable'])->name('masterTable');

@@ -52,7 +52,9 @@ class EmployeeController extends Controller
         'salary_per_day' => $request->salary_per_day,
     ]);
 
-    return redirect('addTable')->with('success',"Employee is added Successfully");
+    $Message = $request->name." is Updated Successfully";
+
+        return redirect('addEmployee')->with('success',$Message);
    
     
 }
@@ -69,9 +71,6 @@ class EmployeeController extends Controller
     public function masterTable(){
 
         $Employees = Employee::with('attendance')->get();
-
-
-
         return view('masterTable',compact('Employees'));
     }
 
