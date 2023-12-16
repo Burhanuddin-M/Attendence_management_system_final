@@ -74,6 +74,16 @@ class MyController extends Controller
             ->get();
 
         $total_overtime = $attendance->sum('extra_hours');
+        $total_withdraw = Transaction::where('employee_id',$id)
+        ->whereDate('created_at', '>=', $start_date)
+        ->whereDate('created_at', '<=', $end_date)
+        ->where('type','DEBIT')
+        ->sum('amount');
+
+        $total_present = $attendance->where('type','PRESENT')->count('type');
+
+
+
 
         return view('finalreport', [
             'employeeData' => $employeeData,
@@ -81,6 +91,8 @@ class MyController extends Controller
             'start_date' => $start_date,
             'end_date' => $end_date,
             'total_overtime' => $total_overtime,
+            'total_withdraw'=> $total_withdraw,
+            'total_present'=> $total_present
         ]);
     }
 }

@@ -105,7 +105,7 @@
                         <th>Date</th>
                         <th>Present</th>
                         <th>Overtime</th>
-                        <th>Salary</th>
+                        <th>Withdraw</th>
                     </tr>
                 </thead>
 
@@ -121,7 +121,7 @@
                             @if (count($attendance) > 0)
                                 @if ($temp_date->equalTo(Carbon::parse($attendance[0]['date'])))
                                     <td>{{ Carbon::parse($attendance[0]['date'])->format('jS M Y') }}</td>
-                                    <td>{{ $attendance[0]['type'] == 'PRESENT' ? '✅' : '❌' }}</td>
+                                    <td class="fw-bold">{{ $attendance[0]['type'] == 'PRESENT' ? 'PRESENT' : 'ABSENT' }}</td>
                                     <td>{{ $attendance[0]['extra_hours'] }}</td>
                                     <td>{{ $attendance[0]['total_amount'] }}</td>
                                     @php
@@ -148,10 +148,10 @@
 
                 <tfoot>
                     <tr>
-                        <td>-</td>
-                        <td>-</td>
-                        <td><b>{{ $total_overtime }}</b></td>
-                        <td>-</td>
+                        <td class="text-center"><b>Total Value</b></td>
+                        <td class="text-center"><b>{{ $total_present }}</b></td>
+                        <td class="text-center"><b>{{ $total_overtime }}</b></td>
+                        <td class="text-center"><b>{{$total_withdraw}}</b></td>
                     </tr>
                 </tfoot>
             </table>
@@ -162,7 +162,8 @@
         $(document).ready(function() {
             $('#example').DataTable({
                 dom: 'Bfrtip',
-                buttons: [{
+                buttons: [
+                    {
                         extend: 'pdf',
                         text: 'DOWNLOAD AS A PDF',
                         className: 'btn-pdf'
@@ -173,7 +174,10 @@
                         className: 'btn-print'
                     }
                 ],
-                searching: false // Disable search feature
+                searching: false, // Disable search feature
+                pageLength: -1, // Display all records initially
+                footer:true,
+                ordering: false,
             });
         });
     </script>
