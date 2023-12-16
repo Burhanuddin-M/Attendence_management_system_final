@@ -102,10 +102,10 @@
             <table id="example" class="display nowrap">
                 <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Present</th>
-                        <th>Overtime</th>
-                        <th>Withdraw</th>
+                        <th class="text-center">Date</th>
+                        <th class="text-center">Present</th>
+                        <th class="text-center">Overtime</th>
+                        <th class="text-center">Withdraw</th>
                     </tr>
                 </thead>
 
@@ -121,7 +121,7 @@
                             @if (count($attendance) > 0)
                                 @if ($temp_date->equalTo(Carbon::parse($attendance[0]['date'])))
                                     <td>{{ Carbon::parse($attendance[0]['date'])->format('jS M Y') }}</td>
-                                    <td class="fw-bold">{{ $attendance[0]['type'] == 'PRESENT' ? 'PRESENT' : 'ABSENT' }}</td>
+                                    <td class="fw-bold">{{ $attendance[0]['type'] == 'PRESENT' ? 'P' : 'A' }}</td>
                                     <td>{{ $attendance[0]['extra_hours'] }}</td>
                                     <td>{{ $attendance[0]['total_amount'] }}</td>
                                     @php
@@ -134,7 +134,7 @@
                                     <td>-</td>
                                 @endif
                             @else
-                                <td>{{ $temp_date }}</td>
+                                <td>{{ Carbon::parse($temp_date)->format('jS M Y') }}</td>
                                 <td>-</td>
                                 <td>-</td>
                                 <td>-</td>
