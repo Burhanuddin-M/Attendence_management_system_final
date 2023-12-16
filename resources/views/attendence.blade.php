@@ -49,7 +49,7 @@
 
                 <tbody>
                     @foreach ($employees as $employee)
-                        <form action="{{ route('attendencePost', ['id' => $employee->id]) }}" method="POST">
+                        <form action="{{ route('attendencePost', ['id' => $employee->id]) }}" method="POST" id="myForm">
                             @csrf
                             <input type="hidden" name="name" value="{{ $employee->name }}">
                             <tr>
@@ -100,7 +100,8 @@
                                 </td>
                                 <td>
                                     @if (!$employeeStatus)
-                                        <button type="submit" class="btn btn-sm bg-primary text-white">Save</button>
+                                        <button type="button" class="btn btn-sm bg-primary text-white"
+                                            onclick="confirmSave()">Save</button>
                                     @endif
                                 </td>
 
@@ -119,6 +120,20 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
     <!-- Font Awesome Icons -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+
+    <script>
+        function confirmSave() {
+            var confirmResult = confirm("Are you sure you want to save?");
+
+            if (confirmResult) {
+                // If the user clicks "OK" in the confirmation dialog
+                document.getElementById('myForm').submit(); // Replace 'yourFormId' with your actual form ID
+            } else {
+                // If the user clicks "Cancel" in the confirmation dialog
+                // You can add additional logic or leave it empty
+            }
+        }
+    </script>
 
     <script>
         // Add JavaScript to set the initial state and update the label text based on the switch state
