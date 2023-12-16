@@ -39,13 +39,7 @@ class MyController extends Controller
         ]);
 
 
-
-        $Employee = Employee::find($id);
-        $portfolio_amount = $Employee->amount_portfolio;
-        // $Employee->amount_portfolio = $portfolio_amount + $amount;
-        $Employee->amount_portfolio = Employee::calculatePortfolio($Employee);
-        $Employee->save();
-
+        $Employee = Employee::find($transaction->employee_id);
         $Message = $Employee->name . " was deposited the amount of " . $amount;
 
         return redirect('deposits')->with('success', $Message);
