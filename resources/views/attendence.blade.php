@@ -48,33 +48,62 @@
                 </thead>
 
                 <tbody>
-                    @foreach ($Employees as $employee)
+                    @foreach ($employees as $employee)
                         <form action="{{ route('attendencePost', ['id' => $employee->id]) }}" method="POST">
                             @csrf
                             <input type="hidden" name="name" value="{{ $employee->name }}">
                             <tr>
-                                <td>✅</td>
-                                <td>{{ $employee->name }}</td>
                                 <td>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input attendance-switch" type="checkbox" name="attendance"
-                                            value="absent" id="attendanceSwitch_{{ $loop->index }}">
-                                        <label class="form-check-label" for="attendanceSwitch_{{ $loop->index }}">Absent</label>
-                                    </div>
+                                    @php
+                                        $employeeStatus = $status[$employee->id - 1] ?? null;
+                                    @endphp
+
+                                    @if ($employeeStatus)
+                                        ✅
+                                    @else
+                                        ❌
+                                    @endif
+                                </td>
+                                <td>
+                                    @if (!$employeeStatus)
+                                        {{ $employee->name }}
+                                    @else
+                                        Marked...
+                                    @endif
+                                </td>
+
+                                <td>
+                                    @if (!$employeeStatus)
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input attendance-switch" type="checkbox"
+                                                name="attendance" value="absent"
+                                                id="attendanceSwitch_{{ $loop->index }}">
+                                            <label class="form-check-label"
+                                                for="attendanceSwitch_{{ $loop->index }}">Absent</label>
+                                        </div>
+                                    @endif
                                 </td>
                                 <td class="overtime-row" style="display:none;">
-                                    <select class="form-select form-select-sm" id="numberSelect" name="hours">
-                                        @for ($i = 0; $i <= 6; $i++)
-                                            <option name="hour">{{ $i }}</option>
-                                        @endfor
-                                    </select>
+                                    @if (!$employeeStatus)
+                                        <select class="form-select form-select-sm" id="numberSelect" name="hours">
+                                            @for ($i = 0; $i <= 6; $i++)
+                                                <option name="hour">{{ $i }}</option>
+                                            @endfor
+                                        </select>
+                                    @endif
                                 </td>
                                 <td class="withdraw-row" style="display:none;">
-                                    <input type="number" class="form-control form-control-sm" id="amount" name="withdraw">
+                                    @if (!$employeeStatus)
+                                        <input type="number" class="form-control form-control-sm" id="amount"
+                                            name="withdraw">
+                                    @endif
                                 </td>
                                 <td>
-                                    <button type="submit" class="btn btn-sm bg-primary text-white">Save</button>
+                                    @if (!$employeeStatus)
+                                        <button type="submit" class="btn btn-sm bg-primary text-white">Save</button>
+                                    @endif
                                 </td>
+
                             </tr>
                         </form>
                     @endforeach
@@ -93,18 +122,18 @@
 
     <script>
         // Add JavaScript to set the initial state and update the label text based on the switch state
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             let switches = document.querySelectorAll('.attendance-switch');
             let overtimeHeader = document.querySelector('.overtime-header');
             let withdrawHeader = document.querySelector('.withdraw-header');
 
-            switches.forEach(function (switchElem) {
+            switches.forEach(function(switchElem) {
                 // Set the initial state to "Absent"
                 switchElem.checked = false;
                 switchElem.parentElement.classList.add('text-danger');
                 switchElem.parentElement.classList.remove('text-success');
 
-                switchElem.addEventListener('change', function () {
+                switchElem.addEventListener('change', function() {
                     let label = switchElem.nextElementSibling; // Get the label element
                     let overtimeRow = switchElem.closest('tr').querySelector('.overtime-row');
                     let withdrawRow = switchElem.closest('tr').querySelector('.withdraw-row');
