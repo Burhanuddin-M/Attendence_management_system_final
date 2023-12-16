@@ -43,6 +43,8 @@ class AttendanceController extends Controller
                 'employee_id' => $id,
                 'type' => 'PRESENT',
                 'date' => $formattedDate,
+                'extra_hours'=>$request->hours,
+                'base_amount'=>$employee->salary_per_day
             ]);
             if ($attendance->type == Attendance::PRESENT) {
                 $employee_salary = $employee->salary_per_day;

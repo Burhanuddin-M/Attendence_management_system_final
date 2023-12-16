@@ -58,10 +58,10 @@
         <table id="employeeTable" class="table table-hover table-striped">
             <thead>
                 <tr>
-                    <th>Employee</th>
-                    <th>P</th>
-                    <th>A</th>
-                    <th>Portfolio</th>
+                    <th class="text-center">Employee</th>
+                    <th class="text-center">P</th>
+                    <th class="text-center">A</th>
+                    <th class="text-center">Portfolio</th>
                 </tr>
             </thead>
 
@@ -88,9 +88,12 @@
 
     <script>
         $(document).ready(function () {
-            $('#employeeTable').DataTable();
+            $('#employeeTable').DataTable({
+                ordering: false
+            });
         });
     </script>
+    
 </body>
 
 </html>

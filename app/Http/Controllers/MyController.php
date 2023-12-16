@@ -82,6 +82,12 @@ class MyController extends Controller
 
         $total_present = $attendance->where('type','PRESENT')->count('type');
 
+        $date_withdraw = Transaction::where('employee_id',$id)
+        ->whereDate('created_at', '>=', $start_date)
+        ->whereDate('created_at', '<=', $end_date)
+        ->where('type','DEBIT')
+        ->get();
+
 
 
 
@@ -92,7 +98,8 @@ class MyController extends Controller
             'end_date' => $end_date,
             'total_overtime' => $total_overtime,
             'total_withdraw'=> $total_withdraw,
-            'total_present'=> $total_present
+            'total_present'=> $total_present,
+            'date_withdraw'=>$date_withdraw
         ]);
     }
 }
