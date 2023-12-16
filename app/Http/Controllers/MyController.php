@@ -79,6 +79,7 @@ class MyController extends Controller
         $total_overtime = $attendance->sum('extra_hours');
 
         return view('finalreport', [
+            'employeeData'=>$employeeData,
             'attendance' => $attendance->toArray(),
             'start_date' => $start_date,
             'end_date' => $end_date,
