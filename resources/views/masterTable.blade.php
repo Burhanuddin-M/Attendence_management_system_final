@@ -49,6 +49,9 @@
 <body>
 
     <div class="container">
+        <button class="btn btn-primary text-center">
+            <a href="{{ route('attendence.index') }}" class="text-white text-decoration-none">←</a>
+        </button>
 
         <h3 class="text-center">{{ \Carbon\Carbon::now()->format('jS F Y') }}</h3>
 

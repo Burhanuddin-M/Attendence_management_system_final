@@ -24,6 +24,9 @@
 <body class="bg-light"><br>
 
     <div class="container">
+        <button class="btn btn-primary text-center">
+            <a href="{{ route('attendence.index') }}" class="text-white text-decoration-none">←</a>
+        </button>
         <div class="text-center mb-4">
             <table class="table table-bordered">
                 <tr>

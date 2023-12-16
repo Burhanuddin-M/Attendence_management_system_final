@@ -17,6 +17,9 @@
 <body><br>
 
     <div class="container">
+        <button class="btn btn-primary text-center">
+            <a href="{{ route('attendence.index') }}" class="text-white text-decoration-none">←</a>
+        </button>
 
         <h2 class="text-center text-primary">{{ $MyEmployee->name }}'s Report</h2><br>
 

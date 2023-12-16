@@ -24,6 +24,9 @@
     @endif
 
     <div class="container">
+        <button class="btn btn-primary text-center">
+            <a href="{{ route('attendence.index') }}" class="text-white text-decoration-none">←</a>
+        </button>
         <div class="row">
             <div class="col-12">
                 <h1 class="text-center">Deposits</h1><br>

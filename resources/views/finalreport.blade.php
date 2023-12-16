@@ -54,6 +54,9 @@
 <body>
 
     <div class="container">
+        <button class="btn btn-primary text-center">
+            <a href="{{ route('attendence.index') }}" class="text-white text-decoration-none">←</a>
+        </button>
         <h2 class="text-center text-primary">{{ $employeeData->name }}'s Report</h2>
         <table id="example" class="display nowrap">
             <thead>
