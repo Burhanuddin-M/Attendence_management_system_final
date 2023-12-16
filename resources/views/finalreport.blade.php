@@ -83,7 +83,7 @@
 
             .btn-pdf,
             .btn-print,
-            .btn-primary {
+            .btn-primary { 
                 font-size: 12px;
             }
         }
