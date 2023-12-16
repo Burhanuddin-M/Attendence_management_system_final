@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Employee;
-use App\Models\Attendence;
+use App\Models\Attendance;
 use App\Models\Transaction;
 use Carbon\Carbon;
 
@@ -22,16 +22,27 @@ class AttendanceController extends Controller
         return view('attendence', compact('employees', 'status'));
     }
     
-    
-    
-    
-    
 
-    public function attendencePost(Request $request,$id){
 
-        dd($request->all());
+public function attendencePost(Request $request, $id)
+{
+    // Assuming you have an Employee model
+    $employee = Employee::find($id);
 
-        $Message = $request->name." attendence is Updated";
-        return redirect('attendence')->with('success',$Message);
+    if (!$employee) {   
+        return redirect('attendence')->with('error', 'Employee not found');
     }
+
+    $formattedDate = Carbon::now()->toDateString();
+
+    $attendance = Attendance::create([
+        'employee_id' => $id,
+        'date' => $formattedDate,
+    ]);    
+
+    $message = $employee->name . ' attendance is updated';
+    return redirect('attendence')->with('success', $message);
+}
+
+
 }
