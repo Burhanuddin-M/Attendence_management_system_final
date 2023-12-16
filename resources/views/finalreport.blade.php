@@ -7,7 +7,6 @@
     <title>Reports of the Employee</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
 
@@ -22,17 +21,41 @@
 </head>
 
 <style>
-    div.dataTables_wrapper {
-        width: 320px;
-        margin: 0 auto;
+    body {
+        padding-top: 20px;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    th, td {
+        text-align: center;
+    }
+
+    /* Add some spacing and styling to the buttons */
+    .dt-buttons {
+        margin-top: 20px;
+    }
+
+    .btn {
+        margin-right: 10px;
     }
 </style>
 
-<body><br>
+<body>
 
     <div class="container">
-        <h2 class="text-center text-primary">{{ $employeeData->name }}'s Report</h2><br>
-        <table id="example" class="display nowrap" style="width: 100%">
+        <h2 class="text-center text-primary">{{ $employeeData->name }}'s Report</h2>
+        <table id="example" class="display nowrap">
             <thead>
                 <tr>
                     <th>Date</th>
@@ -42,14 +65,13 @@
                 </tr>
             </thead>
 
-
-            @php
-                use Carbon\Carbon;
-                $temp_date = $start_date;
-                $cross = '<div>&#10060</div>';
-            @endphp
-
             <tbody>
+                @php
+                    use Carbon\Carbon;
+                    $temp_date = $start_date;
+                    $cross = '<div>&#10060</div>';
+                @endphp
+
                 @while ($temp_date->lessThanOrEqualTo($end_date) && $temp_date->lessThanOrEqualTo(Carbon::now()))
                     <tr>
                         @if (count($attendance) > 0)
@@ -77,32 +99,34 @@
                     @php
                         $temp_date = $temp_date->addDay();
                     @endphp
-
                 @endwhile
             </tbody>
-            <td>-</td>
-            <td>-</td>
-            <td><b>{{ $total_overtime }}</b> </td>
-            <td>-</td>
 
-
+            <tfoot>
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td><b>{{ $total_overtime }}</b></td>
+                    <td>-</td>
+                </tr>
+            </tfoot>
         </table>
+
+        
     </div>
 
-
     <script>
-       $(document).ready(function() {
-        $('#example').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'excel', 'pdf', 'print'
-            ],
-            searching: false  // Disable search feature
+        $(document).ready(function () {
+            $('#example').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'excel', 'pdf', 'print'
+                ],
+                searching: false  // Disable search feature
+            });
         });
-    });
     </script>
 
-    
 </body>
 
 </html>

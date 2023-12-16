@@ -7,41 +7,27 @@
     <title>Employee's Master Table</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 20px;
+        }
 
-    <!-- Use the slim version of jQuery -->
-    {{-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> --}}
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+        div.dataTables_wrapper {
+            width: 95%;
+            margin: 0 auto;
+        }
+
+        .container {
+            padding: 20px;
+        }
+    </style>
 </head>
 
-<style>
-    div.dataTables_wrapper {
-        width: 300px;
-        margin: 0 auto;
-    }
-</style>
-
-<body><br>
+<body>
 
     <div class="container">
-        {{-- <button class="btn btn-primary text-center">
-            <a href="{{ route('attendence.index') }}" class="text-white text-decoration-none">←</a>
-        </button> --}}
-
-        <h1 class="text-center">Report</h1><br>
-
-        {{-- <select id="employeeSelect" class="form-control text-center" name="name">
-            <option>Select the Employee</option>
-            @foreach ($Employees as $Employee)
-                <option value="{{ $Employee->id }}">{{ $Employee->name }}</option>
-            @endforeach
-        </select>
-
-        <div id="responseDiv">
-            
-            
-        </div> --}}
-
-        <table class="table table-hover table-striped">
+        
+        <table class="table table-hover table-striped" id="employeeTable">
             <thead>
                 <tr>
                     <th>SR</th>
@@ -49,35 +35,27 @@
                     <th>Action</th>
                 </tr>
             </thead>
-
             <tbody>
-
-
-
                 @foreach ($Employees as $employee)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $employee->name }}</td>
-
-                        <td>
-                            <a href="{{route('report.specific',['id'=>$employee->id])}}" class="btn btn-sm btn-primary">OPEN</a>
-                        </td>
-                        
-
-                        
-                    </tr>
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $employee->name }}</td>
+                    <td>
+                        <a href="{{route('report.specific',['id'=>$employee->id])}}" class="btn btn-sm btn-primary">OPEN</a>
+                    </td>
+                </tr>
                 @endforeach
-
-
             </tbody>
         </table>
-
     </div>
 
-
-
-  
-
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#employeeTable').DataTable();
+        });
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>

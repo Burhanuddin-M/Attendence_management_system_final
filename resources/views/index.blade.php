@@ -13,25 +13,20 @@
     <title>Timber House Enterprise</title>
 </head>
 
-<body><br>
+<body class="bg-light">
 
-    <div class="container text-center">
-        <h1 class="text-center text-primary">Attendence Module</h1><br>
-        <!-- For medium and larger screens, the buttons will be displayed inline -->
-        <div class="">
-            <a href="{{route('addEmployee')}}" class="btn btn-outline-primary btn-block fw-bold">Add Beneficiary</a><br><br>
-            <a href="{{route('attendence')}}" class="btn btn-outline-primary btn-block fw-bold">Attendance</a><br><br>
-            <a href="{{route('masterTable')}}" class="btn btn-outline-primary btn-block  fw-bold">Master Table</a><br><br>
-            <a href="{{route('deposits')}}" class="btn btn-outline-primary btn-block fw-bold">Deposits</a><br><br>
-            <a href="{{route('transaction.show')}}" class="btn btn-outline-primary btn-block fw-bold">Transactions</a><br><br>
-            <a href="{{route('reports.show')}}" class="btn btn-outline-primary btn-block fw-bold">Report</a><br><br>
+    <div class="container text-center mt-5">
+        <h1 class="text-center text-primary mb-4">Attendance Module</h1>
+
+        <div class="d-grid gap-2">
+            <a href="{{route('addEmployee')}}" class="btn btn-outline-primary btn-block fw-bold mb-2">Add Beneficiary</a>
+            <a href="{{route('attendence')}}" class="btn btn-outline-primary btn-block fw-bold mb-2">Attendance</a>
+            <a href="{{route('masterTable')}}" class="btn btn-outline-primary btn-block fw-bold mb-2">Master Table</a>
+            <a href="{{route('deposits')}}" class="btn btn-outline-primary btn-block fw-bold mb-2">Deposits</a>
+            <a href="{{route('transaction.show')}}" class="btn btn-outline-primary btn-block fw-bold mb-2">Transactions</a>
+            <a href="{{route('reports.show')}}" class="btn btn-outline-primary btn-block fw-bold mb-2">Report</a>
         </div>
     </div>
-    
-    
-    
-    
-
 
     <!-- Optional JavaScript; choose one of the two! -->
 
