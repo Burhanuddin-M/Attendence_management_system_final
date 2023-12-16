@@ -28,7 +28,7 @@ class MyController extends Controller
     {
 
         $amount = $request->amount;
-        $message = $request->message." - ".$amount;
+        $message = $request->message . " - " . $amount;
 
 
         $transaction = Transaction::create([
@@ -42,7 +42,8 @@ class MyController extends Controller
 
         $Employee = Employee::find($id);
         $portfolio_amount = $Employee->amount_portfolio;
-        $Employee->amount_portfolio = $portfolio_amount + $amount;
+        // $Employee->amount_portfolio = $portfolio_amount + $amount;
+        $Employee->amount_portfolio = Employee::calculatePortfolio($Employee);
         $Employee->save();
 
         $Message = $Employee->name . " was deposited the amount of " . $amount;
@@ -62,8 +63,8 @@ class MyController extends Controller
         return view('specificreport', compact('MyEmployee'));
     }
 
-    
-    public function finalreport($id,request $request)
+
+    public function finalreport($id, request $request)
     {
         $date = $request->date;
         $start_date = Carbon::parse($date)->startOfMonth();
@@ -79,7 +80,7 @@ class MyController extends Controller
         $total_overtime = $attendance->sum('extra_hours');
 
         return view('finalreport', [
-            'employeeData'=>$employeeData,
+            'employeeData' => $employeeData,
             'attendance' => $attendance->toArray(),
             'start_date' => $start_date,
             'end_date' => $end_date,
