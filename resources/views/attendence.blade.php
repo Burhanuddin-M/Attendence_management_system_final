@@ -68,7 +68,7 @@
                                     @if (!$employeeStatus)
                                         {{ $employee->name }}
                                     @else
-                                        Marked...
+                                        {{ $employee->name }}
                                     @endif
                                 </td>
 
