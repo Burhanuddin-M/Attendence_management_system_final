@@ -40,6 +40,8 @@ class MyController extends Controller
 
 
         $Employee = Employee::find($transaction->employee_id);
+        $Employee->save();
+
         $Message = $Employee->name . " was deposited the amount of " . $amount;
 
         return redirect('deposits')->with('success', $Message);
