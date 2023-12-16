@@ -42,7 +42,6 @@ class MyController extends Controller
 
         $Employee = Employee::find($id);
         $portfolio_amount = $Employee->amount_portfolio;
-        // $Employee->amount_portfolio = $portfolio_amount + $amount;
         $Employee->amount_portfolio = Employee::calculatePortfolio($Employee);
         $Employee->save();
 
