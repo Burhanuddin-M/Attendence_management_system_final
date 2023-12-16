@@ -65,7 +65,7 @@ class Employee extends Model
     {
         $total_debited_amount = $employee->transactions()->where('type', Transaction::DEBIT)->sum('amount');
         $total_credited_amount = $employee->transactions()->where('type', Transaction::CREDIT)->sum('amount');
-        $total_earned_amount = Employee::calculateTotalEarning($employee);
-        return $total_earned_amount + $total_credited_amount - $total_debited_amount;
+        $total_deposited_amount = $employee->transactions()->where('type', Transaction::DEPOSIT)->sum('amount');
+        return $total_credited_amount +  $total_deposited_amount - $total_debited_amount;
     }
 }

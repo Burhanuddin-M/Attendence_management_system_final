@@ -11,7 +11,7 @@ class Transaction extends Model
 
     public $timestamps = true;
 
-    const DEBIT = "DEBIT", CREDIT = "CREDIT";
+    const DEBIT = "DEBIT", CREDIT = "CREDIT", DEPOSIT = "DEPOSIT";
 
     //TABLE
     public $table = 'transactions';

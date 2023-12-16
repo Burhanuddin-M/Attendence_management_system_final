@@ -19,7 +19,7 @@ class TransactionFactory extends Factory
     {
         return [
             'amount' => fake()->numberBetween(100, 1000),
-            'type' => fake()->randomElement([Transaction::DEBIT, Transaction::CREDIT]),
+            'type' => fake()->randomElement([Transaction::DEBIT, Transaction::CREDIT, Transaction::DEPOSIT]),
             'note' => fake()->text(50),
         ];
     }
