@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Attendence;
 use App\Models\Transaction;
+use Carbon\Carbon;
 
 class EmployeeController extends Controller
 {
@@ -60,19 +61,15 @@ class EmployeeController extends Controller
 }
 
 
-    
+public function masterTable(){
+    // Get employees with attendance for the current month
+    $Employees = Employee::with(['attendance' => function ($query) {
+        $query->whereYear('date', Carbon::now()->year)
+              ->whereMonth('date', Carbon::now()->month);
+    }])->get();
 
-    // public function masterTable(){
-
-    //     $Employees = Employee::all();
-    //     return view('masterTable',compact('Employees'));
-    // }
-
-    public function masterTable(){
-
-        $Employees = Employee::with('attendance')->get();
-        return view('masterTable',compact('Employees'));
-    }
+    return view('masterTable', compact('Employees'));
+}
 
    
     
