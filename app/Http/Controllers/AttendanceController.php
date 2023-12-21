@@ -43,11 +43,15 @@ class AttendanceController extends Controller
                 'employee_id' => $id,
                 'type' => 'PRESENT',
                 'date' => $formattedDate,
+                'is_half_day' => $request->is_half_day,
             ]);
             if ($attendance->type == Attendance::PRESENT) {
                 $employee_salary = $employee->salary_per_day;
                 if ($request->has('hours') && !is_null($request->hours) && $request->hours > 0) {
                     $employee_salary = $employee_salary + (($employee->salary_per_day / 8) * $request->hours);
+                }
+                if ($attendance->is_half_day) {
+                    $employee_salary = $employee_salary / 2;
                 }
                 Transaction::create(
                     [

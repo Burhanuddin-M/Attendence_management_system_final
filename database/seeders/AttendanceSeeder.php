@@ -28,9 +28,12 @@ class AttendanceSeeder extends Seeder
                     $attendance->total_amount = 0;
                     $attendance->extra_hours = 0;
                 } else {
-                    $attendance->total_amount = $attendance->base_amount + ($attendance->extra_hours * ($employee->salary_per_day / 8));
+                    if ($attendance->is_half_day) {
+                        $attendance->total_amount = $attendance->base_amount + ($attendance->extra_hours * ($employee->salary_per_day / 8));
+                    } else {
+                        $attendance->total_amount = ($attendance->base_amount + ($attendance->extra_hours * ($employee->salary_per_day / 8))) / 2;
+                    }
                 }
-
                 $attendance->save();
                 $date = $date->addDay();
             }
