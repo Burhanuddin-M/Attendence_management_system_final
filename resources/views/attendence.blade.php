@@ -19,7 +19,7 @@
                 <a href="{{ route('attendence.index') }}" class="text-white text-decoration-none">←</a>
             </button>
             <div class="text-center">
-                <h1>{{ \Carbon\Carbon::now()->format('jS F') }} attendance</h3>
+                <h1>{{ \Carbon\Carbon::now()->format('jS F') }} Attendance</h3>
             </div>
         </div><br>
 
@@ -49,12 +49,13 @@
 
                 <tbody>
                     @foreach ($employees as $employee)
-                        <form action="{{ route('attendencePost', ['id' => $employee->id]) }}" method="POST" id="myForm">
+                        <form action="{{ route('attendencePost', ['id' => $employee->id]) }}" method="POST"
+                            id="myForm">
                             @csrf
                             <input type="hidden" name="name" value="{{ $employee->name }}">
                             <tr>
                                 <td>
-                                    @if (count($employee->attendance)>0)
+                                    @if (count($employee->attendance) > 0)
                                         ✅
                                     @else
                                         ❌
@@ -62,20 +63,19 @@
                                 </td>
                                 <td>
 
-                                    @if (count($employee->attendance)>0)
+                                    @if (count($employee->attendance) > 0)
                                         @if ($employee->attendance[0]->type == 'PRESENT')
-                                            {{ $employee->name." is marked Present" }}
+                                            {{ $employee->name}}
                                         @else
-                                            {{ $employee->name." is marked Absent" }}
+                                            {{ $employee->name}}
                                         @endif
-
                                     @else
                                         {{ $employee->name }}
                                     @endif
                                 </td>
 
                                 <td>
-                                    @if (!(count($employee->attendance)>0))
+                                    @if (!(count($employee->attendance) > 0))
                                         <div class="form-check form-switch">
                                             <input class="form-check-input attendance-switch" type="checkbox"
                                                 name="attendance" value="absent"
@@ -83,22 +83,29 @@
                                             <label class="form-check-label"
                                                 for="attendanceSwitch_{{ $loop->index }}">Absent</label>
                                         </div>
+                                    @else
+
+                                    @if ($employee->attendance[0]->type == 'PRESENT')
+                                            <p class="text-success">Present</p>
+                                        @else
+                                        <p class="text-danger">Absent</p>
+                                        @endif
                                     @endif
 
                                 </td>
                                 <td class="overtime-row" style="display:none;">
-                                        <select class="form-select form-select-sm" id="numberSelect" name="hours">
-                                            @for ($i = 0; $i <= 6; $i++)
-                                                <option name="hour">{{ $i }}</option>
-                                            @endfor
-                                        </select>
+                                    <select class="form-select form-select-sm" id="numberSelect" name="hours">
+                                        @for ($i = 0; $i <= 6; $i++)
+                                            <option name="hour">{{ $i }}</option>
+                                        @endfor
+                                    </select>
                                 </td>
                                 <td class="withdraw-row" style="display:none;">
-                                        <input type="number" class="form-control form-control-sm" id="amount"
-                                            name="withdraw">
+                                    <input type="number" class="form-control form-control-sm" id="amount"
+                                        name="withdraw">
                                 </td>
                                 <td>
-                                    @if (!(count($employee->attendance)>0))
+                                    @if (!(count($employee->attendance) > 0))
                                         <button type="submit" class="btn btn-sm bg-primary text-white">Save</button>
                                     @endif
 

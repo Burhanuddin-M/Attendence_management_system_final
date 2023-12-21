@@ -51,7 +51,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $employee->name }}</td>
                             <td class="@if ($employee->amount_portfolio < 0) text-danger @else text-success @endif">
-                                <b>{{ abs($employee->amount_portfolio) }}</b>
+                                <b>{{'₹ '. number_format(round(abs($employee->amount_portfolio))) }}</b>
                             </td>
 
                             <td>

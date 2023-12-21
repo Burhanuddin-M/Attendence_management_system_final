@@ -58,10 +58,10 @@
         <table id="employeeTable" class="table table-hover table-striped">
             <thead>
                 <tr>
-                    <th>Employee</th>
-                    <th>P</th>
-                    <th>A</th>
-                    <th>Portfolio</th>
+                    <th class="text-center">Employee</th>
+                    <th class="text-center">P</th>
+                    <th class="text-center">A</th>
+                    <th class="text-center">Portfolio</th>
                 </tr>
             </thead>
 
@@ -73,7 +73,8 @@
                         <td>{{ $employee->attendance->where('type', 'ABSENT')->count() }}</td>
 
                         <td class="portfolio @if ($employee->amount_portfolio < 0) negative @else positive @endif">
-                            {{ abs($employee->amount_portfolio) }}
+                            {{'₹ '. number_format(round(abs($employee->amount_portfolio))) }}
+
                         </td>
                     </tr>
                 @endforeach
@@ -88,9 +89,12 @@
 
     <script>
         $(document).ready(function () {
-            $('#employeeTable').DataTable();
+            $('#employeeTable').DataTable({
+                ordering: false
+            });
         });
     </script>
+    
 </body>
 
 </html>

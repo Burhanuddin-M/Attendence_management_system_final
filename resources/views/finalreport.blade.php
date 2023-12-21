@@ -11,8 +11,10 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap4.min.css">
 
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
@@ -31,7 +33,8 @@
 
         .container {
             padding: 20px;
-            overflow-x: auto; /* Enable horizontal scroll on small screens */
+            overflow-x: auto;
+            /* Enable horizontal scroll on small screens */
         }
 
         h2 {
@@ -40,7 +43,8 @@
 
         table {
             width: 100%;
-            margin-top: 20px; /* Add spacing on top of the table */
+            margin-top: 20px;
+            /* Add spacing on top of the table */
             border-collapse: collapse;
         }
 
@@ -48,7 +52,8 @@
         td {
             text-align: center;
             padding: 8px;
-            border: 1px solid #ddd; /* Add borders to cells */
+            border: 1px solid #ddd;
+            /* Add borders to cells */
         }
 
         /* Add some spacing and styling to the buttons */
@@ -75,6 +80,7 @@
         }
 
         @media only screen and (max-width: 600px) {
+
             /* Add specific styles for smaller screens */
             th,
             td {
@@ -102,10 +108,10 @@
             <table id="example" class="display nowrap">
                 <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Present</th>
-                        <th>Overtime</th>
-                        <th>Salary</th>
+                        <th class="text-center">Date</th>
+                        <th class="text-center">Present</th>
+                        <th class="text-center">Overtime</th>
+                        <th class="text-center">Withdraw</th>
                     </tr>
                 </thead>
 
@@ -121,9 +127,24 @@
                             @if (count($attendance) > 0)
                                 @if ($temp_date->equalTo(Carbon::parse($attendance[0]['date'])))
                                     <td>{{ Carbon::parse($attendance[0]['date'])->format('jS M Y') }}</td>
-                                    <td>{{ $attendance[0]['type'] == 'PRESENT' ? '✅' : '❌' }}</td>
+                                    <td class="fw-bold">{{ $attendance[0]['type'] == 'PRESENT' ? 'P' : 'A' }}</td>
                                     <td>{{ $attendance[0]['extra_hours'] }}</td>
-                                    <td>{{ $attendance[0]['total_amount'] }}</td>
+                                    {{-- <td>{{ $attendance[0]['total_amount'] }}</td> --}}
+                                    <td>
+                                        @php
+                                            $withdrawForDate = $date_withdraw
+                                                ->filter(function ($item) use ($temp_date) {
+                                                    return Carbon::parse($item->created_at)->isSameDay($temp_date);
+                                                })
+                                                ->first();
+                                        @endphp
+                                        @if ($withdrawForDate)
+                                            {{ $withdrawForDate->amount }}
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
+                                    
                                     @php
                                         array_shift($attendance);
                                     @endphp
@@ -134,7 +155,7 @@
                                     <td>-</td>
                                 @endif
                             @else
-                                <td>{{ $temp_date }}</td>
+                                <td>{{ Carbon::parse($temp_date)->format('jS M Y') }}</td>
                                 <td>-</td>
                                 <td>-</td>
                                 <td>-</td>
@@ -148,10 +169,10 @@
 
                 <tfoot>
                     <tr>
-                        <td>-</td>
-                        <td>-</td>
-                        <td><b>{{ $total_overtime }}</b></td>
-                        <td>-</td>
+                        <td class="text-center"><b>Total Value</b></td>
+                        <td class="text-center"><b>{{ $total_present }}</b></td>
+                        <td class="text-center"><b>{{ $total_overtime }}</b></td>
+                        <td class="text-center"><b>{{ $total_withdraw }}</b></td>
                     </tr>
                 </tfoot>
             </table>
@@ -173,7 +194,10 @@
                         className: 'btn-print'
                     }
                 ],
-                searching: false // Disable search feature
+                searching: false, // Disable search feature
+                pageLength: -1, // Display all records initially
+                footer: true,
+                ordering: false,
             });
         });
     </script>
@@ -181,4 +205,3 @@
 </body>
 
 </html>
-

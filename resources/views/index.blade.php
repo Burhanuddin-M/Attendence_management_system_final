@@ -22,8 +22,8 @@
             <a href="{{route('addEmployee')}}" class="btn btn-outline-primary btn-block fw-bold mb-2">Add Beneficiary</a>
             <a href="{{route('attendence')}}" class="btn btn-outline-primary btn-block fw-bold mb-2">Attendance</a>
             <a href="{{route('masterTable')}}" class="btn btn-outline-primary btn-block fw-bold mb-2">Master Table</a>
-            <a href="{{route('deposits')}}" class="btn btn-outline-primary btn-block fw-bold mb-2">Deposits</a>
-            <a href="{{route('transaction.show')}}" class="btn btn-outline-primary btn-block fw-bold mb-2">Transactions</a>
+            <a href="{{route('deposits')}}" class="btn btn-outline-primary btn-block fw-bold mb-2">Deposit</a>
+            <a href="{{route('transaction.show')}}" class="btn btn-outline-primary btn-block fw-bold mb-2">Transaction</a>
             <a href="{{route('reports.show')}}" class="btn btn-outline-primary btn-block fw-bold mb-2">Report</a>
         </div>
     </div>

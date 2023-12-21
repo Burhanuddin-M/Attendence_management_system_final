@@ -38,10 +38,10 @@
                     <th>Portfolio</th>
                 </tr>
                 <tr>
-                    <td class="text-danger font-weight-bold">{{ $DebitsAmount }}</td>
-                    <td class="text-success font-weight-bold">{{ $CreditsAmount }}</td>
+                    <td class="text-danger font-weight-bold"><h5>{{'₹ '. number_format(round($DebitsAmount)) }}</h5></td>
+                    <td class="text-success font-weight-bold"><h5>{{'₹ '. number_format(round($CreditsAmount)) }}</h5></td>
                     <td class="{{ $Portfolio < 0 ? 'text-danger font-weight-bold' : 'text-success font-weight-bold' }}">
-                        {{ abs($Portfolio) }}
+                        <h5>{{ '₹ '.number_format(round(abs($Portfolio))) }}</h5>
                     </td>
                 </tr>
             </table>
@@ -108,11 +108,11 @@
                             <td>{{ $transaction->Employee->name }}</td>
                             <td>
                                 @if ($transaction->type == 'DEBIT')
-                                    <b class="text-danger">{{ $transaction->amount }}</b>
+                                    <b class="text-danger">{{'₹ '. number_format(round($transaction->amount))}}</b>
                                 @elseif($transaction->type == 'CREDIT')
-                                    <b class="text-primary">{{ $transaction->amount }}</b>
+                                    <b class="text-primary">{{'₹ '. number_format(round($transaction->amount)) }}</b>
                                 @else
-                                    <b class="text-success">{{ $transaction->amount }}</b>
+                                    <b class="text-success">{{'₹ '. number_format(round($transaction->amount))}}</b>
                                 @endif
                             </td>
                             <td>{{ $transaction->created_at->diffForHumans() }}</td>
