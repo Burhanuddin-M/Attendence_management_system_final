@@ -25,7 +25,7 @@ class AttendanceController extends Controller
     
    
     
-        return view('attendence', compact('employees','CanHalfDay'));
+        return view('attendence', compact('employees'));
     }
     
 
