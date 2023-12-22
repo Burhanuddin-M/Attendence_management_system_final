@@ -87,8 +87,6 @@
                                     @else
                                         @if ($employee->attendance[0]->type == 'PRESENT')
                                             <p class="text-success">Present</p>
-                                        @elseif ($employee->attendance[0]->is_half_day == 1)
-                                            <p class="text-success">Half Day</p>
                                         @else
                                             <p class="text-danger">Absent</p>
                                         @endif
@@ -96,6 +94,7 @@
                                 </td>
 
                                 <td class="halfday-row" style="display:none;">
+                                
                                     <div class="form-check form-halfday">
                                         <input class="form-check-input attendance-halfday" type="checkbox"
                                             name="is_half_day" value="1"

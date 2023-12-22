@@ -16,11 +16,18 @@ class AttendanceController extends Controller
             $query = $query->where('date', Carbon::now()->format('Y-m-d'));
         }])->get();
 
-        // $attendances = $employees->load('attendance');
+        $CanHalfDay = Employee::with(['attendance' => function ($query) {
+            $now = Carbon::now();
+            $query->whereMonth('date', $now->month)
+                  ->whereYear('date', $now->year)
+                  ->where('is_half_day', 1)
+                  ->havingRaw('COUNT(is_half_day) < 2');
+        }]);
 
-        // $status = $attendances->map(function ($employee) {
-        //     return $employee->attendance->firstWhere('date', Carbon::now()->format('Y-m-d'));
-        // });
+        dd($CanHalfDay);
+        
+
+     
 
         return view('attendence', compact('employees'));
     }
