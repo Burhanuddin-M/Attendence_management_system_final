@@ -94,7 +94,6 @@
                                 </td>
 
                                 <td class="halfday-row" style="display:none;">
-                                
                                     <div class="form-check form-halfday">
                                         <input class="form-check-input attendance-halfday" type="checkbox"
                                             name="is_half_day" value="1"
