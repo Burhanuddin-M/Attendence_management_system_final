@@ -41,6 +41,7 @@
                         <th>Status</th>
                         <th>Name</th>
                         <th>{{ \Carbon\Carbon::now()->format('jS') }}</th>
+                        <th class="halfday-header" style="display:none;">Half Day</th>
                         <th class="overtime-header" style="display:none;">Overtime</th>
                         <th class="withdraw-header" style="display:none;">Withdraw</th>
                         <th>Submit</th>
@@ -65,9 +66,9 @@
 
                                     @if (count($employee->attendance) > 0)
                                         @if ($employee->attendance[0]->type == 'PRESENT')
-                                            {{ $employee->name}}
+                                            {{ $employee->name }}
                                         @else
-                                            {{ $employee->name}}
+                                            {{ $employee->name }}
                                         @endif
                                     @else
                                         {{ $employee->name }}
@@ -84,14 +85,24 @@
                                                 for="attendanceSwitch_{{ $loop->index }}">Absent</label>
                                         </div>
                                     @else
-
-                                    @if ($employee->attendance[0]->type == 'PRESENT')
+                                        @if ($employee->attendance[0]->type == 'PRESENT')
                                             <p class="text-success">Present</p>
+                                        @elseif ($employee->attendance[0]->is_half_day == 1)
+                                            <p class="text-success">Half Day</p>
                                         @else
-                                        <p class="text-danger">Absent</p>
+                                            <p class="text-danger">Absent</p>
                                         @endif
                                     @endif
+                                </td>
 
+                                <td class="halfday-row" style="display:none;">
+                                    <div class="form-check form-halfday">
+                                        <input class="form-check-input attendance-halfday" type="checkbox"
+                                            name="is_half_day" value="1"
+                                            id="attendanceSwitch_{{ $loop->index }}">
+                                        <label class="form-check-label"
+                                            for="attendanceHalfday_{{ $loop->index }}"></label>
+                                    </div>
                                 </td>
                                 <td class="overtime-row" style="display:none;">
                                     <select class="form-select form-select-sm" id="numberSelect" name="hours">
@@ -128,21 +139,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
 
     <script>
-        // function confirmSave() {
-        //     var confirmResult = confirm("Are you sure you want to save?");
-
-        //     if (confirmResult) {
-        //         // If the user clicks "OK" in the confirmation dialog
-        //         document.getElementById('myForm').submit(); // Replace 'yourFormId' with your actual form ID
-        //     } else {
-        //         // If the user clicks "Cancel" in the confirmation dialog
-        //         // You can add additional logic or leave it empty
-        //     }
-        // }
-    </script>
-
-    <script>
-        // Add JavaScript to set the initial state and update the label text based on the switch state
         document.addEventListener('DOMContentLoaded', function() {
             let switches = document.querySelectorAll('.attendance-switch');
             let overtimeHeader = document.querySelector('.overtime-header');
@@ -153,6 +149,8 @@
                 switchElem.checked = false;
                 switchElem.parentElement.classList.add('text-danger');
                 switchElem.parentElement.classList.remove('text-success');
+
+                updateRowVisibility(switchElem);
 
                 switchElem.addEventListener('change', function() {
                     let label = switchElem.nextElementSibling; // Get the label element
@@ -176,8 +174,23 @@
                         overtimeHeader.style.display = 'none';
                         withdrawHeader.style.display = 'none';
                     }
+
+                    updateRowVisibility(switchElem);
                 });
             });
+
+            function updateRowVisibility(switchElem) {
+                let halfDayRow = switchElem.closest('tr').querySelector('.halfday-row');
+                let halfDayHeader = document.querySelector('.halfday-header');
+
+                if (switchElem.checked) {
+                    halfDayRow.style.display = 'table-row';
+                    halfDayHeader.style.display = 'table-cell';
+                } else {
+                    halfDayRow.style.display = 'none';
+                    halfDayHeader.style.display = 'none';
+                }
+            }
         });
     </script>
 </body>

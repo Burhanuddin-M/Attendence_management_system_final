@@ -24,15 +24,20 @@ public function showTransaction(Request $request)
         ? Transaction::whereBetween('created_at', [date("$startDate 00:00:00"), date("$endDate 23:59:59")])->latest()->get()
         : Transaction::latest()->get();
 
-    
-    //Porfolio according to current Date
-    $DebitsAmount = Transaction::whereDate('created_at', today())->where('type', 'DEBIT')->sum('amount');
-    $CreditsAmount = Transaction::whereDate('created_at',Carbon::now())->where('type','DEPOSIT')->sum('amount');
+    // Portfolio according to the current Date
+    $DebitsAmount = Transaction::whereDate('created_at', today())
+        ->whereIn('type', ['DEBIT', 'CREDIT'])
+        ->sum('amount');
+
+    $CreditsAmount = Transaction::whereDate('created_at', today())
+        ->where('type', 'DEPOSIT') // Check if this should be 'CREDIT' instead of 'DEPOSIT'
+        ->sum('amount');
+
     $Portfolio = $CreditsAmount - $DebitsAmount;
 
-
-    return view('transactions', compact('transactions','DebitsAmount','CreditsAmount','Portfolio'));
+    return view('transactions', compact('transactions', 'DebitsAmount', 'CreditsAmount', 'Portfolio'));
 }
+
 
 
 

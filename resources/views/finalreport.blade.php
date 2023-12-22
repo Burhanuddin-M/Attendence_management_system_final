@@ -127,7 +127,14 @@
                             @if (count($attendance) > 0)
                                 @if ($temp_date->equalTo(Carbon::parse($attendance[0]['date'])))
                                     <td>{{ Carbon::parse($attendance[0]['date'])->format('jS M Y') }}</td>
-                                    <td class="fw-bold">{{ $attendance[0]['type'] == 'PRESENT' ? 'P' : 'A' }}</td>
+                                    <td class="fw-bold">
+                                        @if ($attendance[0]['is_half_day'] == 1)
+                                            HD
+                                        @else
+                                            {{ $attendance[0]['type'] == 'PRESENT' ? 'P' : 'A' }}
+                                        @endif
+                                    </td>
+
                                     <td>{{ $attendance[0]['extra_hours'] }}</td>
                                     {{-- <td>{{ $attendance[0]['total_amount'] }}</td> --}}
                                     <td>
@@ -144,7 +151,7 @@
                                             -
                                         @endif
                                     </td>
-                                    
+
                                     @php
                                         array_shift($attendance);
                                     @endphp

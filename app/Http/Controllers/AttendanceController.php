@@ -44,6 +44,7 @@ class AttendanceController extends Controller
                 'type' => 'PRESENT',
                 'date' => $formattedDate,
                 'is_half_day' => $request->is_half_day,
+                'extra_hours'=> $request->hours
             ]);
             if ($attendance->type == Attendance::PRESENT) {
                 $employee_salary = $employee->salary_per_day;
