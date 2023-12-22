@@ -93,8 +93,8 @@
                                     @endif
                                 </td>
 
-                                <td class="halfday-row" style="display:none;">
-                                    <div class="form-check form-halfday">
+                                <td class="halfday-row text-center" style="display:none;">
+                                    <div class="form-check form-halfday d-inline-block">
                                         <input class="form-check-input attendance-halfday" type="checkbox"
                                             name="is_half_day" value="1"
                                             id="attendanceSwitch_{{ $loop->index }}">
@@ -102,6 +102,7 @@
                                             for="attendanceHalfday_{{ $loop->index }}"></label>
                                     </div>
                                 </td>
+                                
                                 <td class="overtime-row" style="display:none;">
                                     <select class="form-select form-select-sm" id="numberSelect" name="hours">
                                         @for ($i = 0; $i <= 6; $i++)
