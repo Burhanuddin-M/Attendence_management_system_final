@@ -93,7 +93,8 @@
                                     @endif
                                 </td>
 
-                                <td class="halfday-row text-center" style="display:none;">
+                                <td class="halfday-row" style="display:none;">
+                                    @if ($CanHalfDay->contains($employee) && $employee->attendance->where('is_half_day', 1)->count() < 2)
                                     <div class="form-check form-halfday d-inline-block">
                                         <input class="form-check-input attendance-halfday" type="checkbox"
                                             name="is_half_day" value="1"
@@ -101,6 +102,9 @@
                                         <label class="form-check-label"
                                             for="attendanceHalfday_{{ $loop->index }}"></label>
                                     </div>
+                                    @else
+                                        <p>NA</p>
+                                    @endif
                                 </td>
                                 
                                 <td class="overtime-row" style="display:none;">
@@ -111,9 +115,13 @@
                                     </select>
                                 </td>
                                 <td class="withdraw-row" style="display:none;">
-                                    <input type="number" class="form-control form-control-sm" id="amount"
-                                        name="withdraw">
+                                    <select class="form-select form-select-sm" id="amount" name="withdraw">
+                                        @for ($value = 0; $value <= 100000; $value += 1000)
+                                            <option value="{{ $value }}">{{ $value }}</option>
+                                        @endfor
+                                    </select>
                                 </td>
+                                
                                 <td>
                                     @if (!(count($employee->attendance) > 0))
                                         <button type="submit" class="btn btn-sm bg-primary text-white">Save</button>
